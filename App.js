@@ -2,6 +2,8 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import LoginView from "./src/pages/login/loginView";
 import RegisterView from "./src/pages/login/registerView";
+import { Text, View } from 'react-native';
+import { TransitionSpecs } from '@react-navigation/stack';
 import {
   createStackNavigator,
   TransitionPresets,
@@ -9,33 +11,71 @@ import {
 import MainPage from './src/pages/mainPage';
 const Stack = createStackNavigator();
 
+
+function HomeScreen1({ navigation }) {
+    return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text>Home Screen1</Text>
+        </View>
+    );
+}
+
+function HomeScreen2({ navigation }) {
+    return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text>Home Screen2</Text>
+        </View>
+    );
+}
+
+function HomeScreen3({ navigation }) {
+    return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text>Home Screen3</Text>
+        </View>
+    );
+}
+window.isLogin = false;
 function App() {
-  return (
+    // Define multiple groups of screens in objects like this
+    const HomeScreens = {
+        Home: MainPage,
+    };
 
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Login"
-        screenOptions={{
-          gestureEnabled: true,
-          cardOverlayEnabled: true,
-          ...TransitionPresets.DefaultTransition,
-        }}
+    const SignScreens = {
+        SignIn: LoginView,
+        SignUp: RegisterView,
+        Home: MainPage,
+    };
 
-        mode="modal"
-      >
-        <Stack.Screen name="Login"
-          options={{
-            headerTitle: true,
-          }} component={LoginView} />
-        <Stack.Screen name="register" component={RegisterView} />
-        <Stack.Screen name="mainPage"
-        options={{
-          headerTitle: true,
-        }}
-         component={MainPage} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+    if(window.isLogin){
+        <MainPage></MainPage>
+    }else{
+        return (
+            <NavigationContainer>
+                <Stack.Navigator
+                screenOptions={{
+                    headerShown: false,
+                }}
+                >
+                    {Object.entries({
+                        // Use the screens normally
+                        ...SignScreens,
+                    }).map(([name, component]) => (
+                        <Stack.Screen name={name}  options={{
+                            headerTitle:true,
+                            transitionSpec: {
+                                open: TransitionSpecs.TransitionIOSSpec,
+                                close: TransitionSpecs.TransitionIOSSpec,
+                            },
+                        }}  component={component} />
+                    ))}
+                </Stack.Navigator>
+            </NavigationContainer>
+        );
+    }
+
+
 }
 
 export default App;

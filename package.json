@@ -21,6 +21,7 @@
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "^3.4.0",
     "react-native-swiper": "^1.6.0",
+    "react-native-tab-navigator": "^0.3.4",
     "react-navigation": "^4.4.4"
   },
   "devDependencies": {

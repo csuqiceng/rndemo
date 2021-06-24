@@ -20,11 +20,11 @@ export default function LoginView({ navigation }) {
             <TextInput placeholder={'  请输入用户名'}  style={{...styles.tgTextInputStyle,marginTop:20}} />
             <TextInput  textContentType='password' placeholder={'  请输入密码'}  password={true}  style={styles.tgTextInputStyle} />
             <View style={styles.tgLoginBtnStyle}>
-                <Button title="登录" color='white'  onPress={() => navigation.navigate('mainPage')} />
+                <Button title="登录" color='white'  onPress={() => navigation.navigate('Home')} />
             </View>
             <View style={styles.tgSettingStyle}>
                 <Text style={{fontSize:15}} onPress={()=> alert("发送错误")}>无法登录</Text>
-                <Text style={{fontSize:15}} onPress={() => navigation.navigate('register')}>新用户</Text>
+                <Text style={{fontSize:15}} onPress={() => navigation.navigate('SignUp')}>新用户</Text>
             </View>
 
         </View>

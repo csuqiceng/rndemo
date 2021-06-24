@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ServicePage from "./service/servicePage";
+import Mine from './personinfo/mine';
 function HomeScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -21,11 +22,11 @@ function SettingsScreen() {
 
 const Tab = createBottomTabNavigator();
 
-export default function MainPage() {
+export default function MainPage({ navigation }) {
   return (
       <Tab.Navigator>
         <Tab.Screen name="Home" component={ServicePage}  />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
+        <Tab.Screen name="Settings" component={Mine} />
       </Tab.Navigator>
   );
 }
