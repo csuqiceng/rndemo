@@ -24,7 +24,6 @@ function ServiceMainPage({ route, navigation }){
                 paginationStyle={{
                     top: -290, left: null, right: 10
                 }}
-
                 loop>
                 <View style={styles.slide} >
                     <Text numberOfLines={1}>Aussie tourist dies at Bali hotel</Text>
@@ -49,15 +48,26 @@ function ServiceMainPage({ route, navigation }){
                 <Text style={{height:30,width:80,borderRadius:5,fontSize:11,color:'gray',marginTop:5,marginLeft:70}} onPress={()=>alert("购买")}>立即购买></Text>
             </View>
             <View style={{flex:1,backgroundColor:'white'}}>
-                <Card title={"会员专享"} firstTitle={"月度保洁"} firstMsg={"专享周期保洁服务"}
-                      secondTitle={"卧室保洁"} secondMsg={"卧室保洁服务"}  onCardClick={onCardClick}></Card>
+                <MidCard title={"会员专享"} firstTitle={"月度保洁"} firstMsg={"专享周期保洁服务"}
+                      secondTitle={"卧室保洁"} secondMsg={"卧室保洁服务"}  onCardClick={onCardClick}></MidCard>
             </View>
             <View style={{flex:1,backgroundColor:'white'}}>
-                <Card title={"保洁服务"} firstTitle={"日常保洁"} firstMsg={"日常保洁服务"}
-                      secondTitle={"深度保洁"} secondMsg={"专业深度保洁服务"} onCardClick={onCardClick}></Card>
+                <MidCard title={"保洁服务"} firstTitle={"日常保洁"} firstMsg={"日常保洁服务"}
+                      secondTitle={"深度保洁"} secondMsg={"专业深度保洁服务"} onCardClick={onCardClick}></MidCard>
             </View>
-            <View style={{flex:1,backgroundColor:'white'}}>
-
+            <View style={{flex:1,backgroundColor:'white',flexDirection:'column',paddingLeft:40,paddingTop:20}}>
+               <View style={{flex:1,flexDirection:'row'}}>
+                   <BottomCard text={"家电清洗"} onCardClick={onCardClick}></BottomCard>
+                   <BottomCard text={"擦玻璃"} onCardClick={onCardClick}></BottomCard>
+                   <BottomCard text={"开荒保洁"} onCardClick={onCardClick}></BottomCard>
+                   <BottomCard text={"专业除螨"} onCardClick={onCardClick}></BottomCard>
+               </View>
+                <View style={{flex:1,flexDirection:'row'}}>
+                    <BottomCard text={"消毒保洁"} onCardClick={onCardClick}></BottomCard>
+                    <BottomCard text={"名宿保洁"} onCardClick={onCardClick}></BottomCard>
+                    <BottomCard text={"企业保洁"} onCardClick={onCardClick}></BottomCard>
+                    <BottomCard text={"保洁卡"} onCardClick={onCardClick}></BottomCard>
+                </View>
             </View>
         </View>
     )
@@ -67,7 +77,7 @@ function ServiceMainPage({ route, navigation }){
 /*
 * 卡片
 * */
-function Card(props)
+function MidCard(props)
 {
 
     return(
@@ -91,6 +101,22 @@ function Card(props)
                 </TouchableOpacity>
             </View>
         </View>
+    )
+}
+
+function BottomCard(props)
+{
+    return(
+        <TouchableOpacity activeOpacity={0.5} style={{flex:1}} onPress={()=>{props.onCardClick(props.text)}}>
+            <View style={{width:100,height:100,flexDirection:'column'}}>
+                <Image source={require('../../assets/favicon.png')}
+                       style={{
+                           width:50,
+                           height:24,
+                           }}/>
+                <Text style={{width:100}}>{props.text}</Text>
+            </View>
+        </TouchableOpacity>
     )
 }
 
