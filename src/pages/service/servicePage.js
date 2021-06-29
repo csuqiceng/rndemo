@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import Swiper from 'react-native-swiper';
 import {Text, View, StyleSheet, Image ,Dimensions,TouchableOpacity} from "react-native";
 import ServiceConfirmPage from "./serviceConfirmPage";
+import ServiceOrderPage from "./serviceOrderPage";
 const {width} = Dimensions.get('window');
 
 function ServiceMainPage({ route, navigation }){
@@ -11,7 +12,6 @@ function ServiceMainPage({ route, navigation }){
         if(data){
             navigation.navigate('ServiceConfirmPage', { name: data })
         }
-
     }
     return(
         <View style={styles.container}>
@@ -125,10 +125,13 @@ const Stack = createStackNavigator();
 
 export default function ServicePage() {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{
+            // headerTitle: false,
+        }}>
             <Stack.Screen name="ServicePage" options={{
                 headerTitle:false
             }} component={ServiceMainPage} />
+            <Stack.Screen name="ServiceOrderPage" options={({ route }) => ({ title: route.params.name })} component={ServiceOrderPage} />
             <Stack.Screen name="ServiceConfirmPage" options={({ route }) => ({ title: route.params.name })} component={ServiceConfirmPage} />
         </Stack.Navigator>
     );

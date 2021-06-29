@@ -4,14 +4,16 @@ import {Text, View, Button, Image, StyleSheet, Platform, Dimensions, SafeAreaVie
 var {width} = Dimensions.get('window');
 export default function  ServiceConfirmPage({ route, navigation })
 {
+    const onClick = (data) =>{
+        if(data){
+            navigation.navigate('ServiceOrderPage', { name: data })
+        }
+    }
     return (
         <View style={styles.container}>
-            <TopView/>
-            <Text style={{marginTop:10,fontWeight:'bold',paddingTop:7,paddingLeft:10,fontSize:12,backgroundColor:'rgba(255,218,185,0.5)',height:30,color:'orange'}} onPress={()=>{alert("联系Ta")}}>{"预约TA为我打扫卧室   >"}</Text>
-            <BottomView/>
-            {/*<Text>Details Screen</Text>*/}
-            {/*<Button title="Go to Home" onPress={() => navigation.navigate('Home')} />*/}
-            {/*<Button title="Go back" onPress={() => navigation.goBack()} />*/}
+            <TopView onOrderClick={onClick}/>
+            <Text style={{marginTop:10,fontWeight:'bold',paddingTop:7,paddingLeft:10,fontSize:12,backgroundColor:'rgba(255,218,185,0.5)',height:30,color:'orange'}} onPress={()=>{onClick('预约')}}>{"预约TA为我打扫卧室   >"}</Text>
+            <BottomView />
         </View>
     );
 }
@@ -39,7 +41,7 @@ function TopView(props) {
                     <Image source={require('../../assets/favicon.png')} style={{width:17, height:17}}/>
                     <Text style={{fontSize:10, color:'black', fontWeight:'normal',marginTop:3}}>{"已服务2753次"}</Text>
                 </View>
-                <Text  style={styles.button} onPress={()=>{alert("联系Ta")}}>{"联系Ta"}</Text>
+                <Text  style={styles.button} onPress={()=>{props.onOrderClick('预约')}}>{"联系Ta"}</Text>
             </View>
         </View>
 
@@ -54,7 +56,7 @@ function BottomView(props)
     });
     const onClick =(e)=>{
         setData({
-            name:"CustomerReviews",
+            name:e,
         })
     }
 
@@ -81,15 +83,39 @@ function BottomView(props)
         }
     }
 
+
     return(
         <View style={{flex:1,flexDirection:'column'}}>
-            <View style={{height:40,backgroundColor:'white'}}>
-                <Text onPress={()=>{onClick()}}>切换</Text>
-            </View>
+            <Toolbar onClick={onClick} data={data.name}/>
             {renderView(data)}
         </View>
     );
 
+}
+
+function Toolbar(props) {
+    let [data] = useState({
+        infos:
+            [
+                {'title':'服务订单','key':'ServiceOrder'},
+                {'title':'保洁员信息','key':'CleanersInfo'},
+                {'title':'客户评价','key':'CustomerReviews'},
+            ]
+    });
+    return(
+        <View style={{height:40,flexDirection:'row'}}>
+            {
+                data.infos.map((item,index)=>(
+                    <Text style={{
+                        flex:1,textAlign:'center',
+                        marginTop:10,
+                        color:props.data === item.key?'orange':'black',
+                    }}
+                    onPress={()=>{props.onClick(item.key)}}>{item.title}</Text>
+                ))
+            }
+        </View>
+    )
 }
 
 function ServiceOrderView(props)
@@ -143,16 +169,16 @@ function ServiceOrderView(props)
 function CleanersInfoView(props)
 {
     return(
-        <View>
-            <Text>cccc</Text>
+        <View style={{borderTopWidth:0.5,borderColor:'gray'}}>
+            <Text>保洁员信息</Text>
         </View>
     )
 }
 function CustomerReviewsView(props)
 {
     return(
-        <View>
-            <Text>cccc</Text>
+        <View style={{borderTopWidth:0.5,borderColor:'gray'}}>
+            <Text>客户评价</Text>
         </View>
     )
 }
