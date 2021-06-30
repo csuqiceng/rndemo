@@ -48,8 +48,13 @@ function App() {
         Home: MainPage,
     };
 
-    if(window.isLogin){
-        <MainPage></MainPage>
+
+    if(1){
+        return (
+            <NavigationContainer>
+                <MainPage></MainPage>
+            </NavigationContainer>
+        )
     }else{
         return (
             <NavigationContainer>
