@@ -1,9 +1,37 @@
 import React,{useState,useEffect} from 'react';
-import {Text, View, Button, Image, StyleSheet, Platform, Dimensions, SafeAreaView,ScrollView} from 'react-native';
+import {
+    Text,
+    View,
+    Button,
+    Image,
+    StyleSheet,
+    Platform,
+    Dimensions,
+    SafeAreaView,
+    ScrollView,
+    TouchableOpacity
+} from 'react-native';
+import NavBar from "../../common/navBar";
 
 var {width} = Dimensions.get('window');
 export default function  ServiceConfirmPage({ route, navigation })
 {
+    // 返回中间按钮
+    const renderTitleItem=()=> {
+        return(
+            <Text style={{textAlign:'center',justifyContent:'center',marginLeft:-50}}>{route.params.name}</Text>
+        );
+    }
+
+    // 返回右边按钮
+    const renderLeftItem=()=> {
+        return(
+            <TouchableOpacity activeOpacity={0.5} onPress={()=>{navigation.goBack()}}
+            >
+                <Text style={{marginLeft:10}}>返回</Text>
+            </TouchableOpacity>
+        );
+    }
     const onClick = (data) =>{
         if(data){
             navigation.navigate('ServiceOrderPage', { name: data })
@@ -11,9 +39,15 @@ export default function  ServiceConfirmPage({ route, navigation })
     }
     return (
         <View style={styles.container}>
-            <TopView onOrderClick={onClick}/>
-            <Text style={{marginTop:10,fontWeight:'bold',paddingTop:7,paddingLeft:10,fontSize:12,backgroundColor:'rgba(255,218,185,0.5)',height:30,color:'orange'}} onPress={()=>{onClick('预约')}}>{"预约TA为我打扫卧室   >"}</Text>
-            <BottomView />
+            <NavBar
+                titleItem = {() => renderTitleItem()}
+                leftItem = {() => renderLeftItem()}
+            />
+            <View style={{flex:1,paddingLeft:10,paddingRight:10,paddingTop:10}}>
+                <TopView onOrderClick={onClick}/>
+                <Text style={{marginTop:10,fontWeight:'bold',paddingTop:7,paddingLeft:10,fontSize:12,backgroundColor:'rgba(255,218,185,0.5)',height:30,color:'orange'}} onPress={()=>{onClick('预约')}}>{"预约TA为我打扫卧室   >"}</Text>
+                <BottomView />
+            </View>
         </View>
     );
 }
@@ -185,9 +219,6 @@ function CustomerReviewsView(props)
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop:20,
-        paddingLeft:20,
-        paddingRight:20,
         backgroundColor:'white',
     },
     button:{

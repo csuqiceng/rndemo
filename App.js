@@ -12,6 +12,7 @@ import MainPage from './src/pages/mainPage';
 const Stack = createStackNavigator();
 
 
+
 function HomeScreen1({ navigation }) {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -36,6 +37,7 @@ function HomeScreen3({ navigation }) {
     );
 }
 window.isLogin = false;
+
 function App() {
     // Define multiple groups of screens in objects like this
     const HomeScreens = {
@@ -49,7 +51,7 @@ function App() {
     };
 
 
-    if(1){
+    if(0){
         return (
             <NavigationContainer>
                 <MainPage></MainPage>
@@ -57,7 +59,8 @@ function App() {
         )
     }else{
         return (
-            <NavigationContainer>
+            <NavigationContainer
+            >
                 <Stack.Navigator
                 screenOptions={{
                     headerShown: false,
@@ -68,11 +71,6 @@ function App() {
                         ...SignScreens,
                     }).map(([name, component]) => (
                         <Stack.Screen name={name}  options={{
-                            headerTitle:true,
-                            transitionSpec: {
-                                open: TransitionSpecs.TransitionIOSSpec,
-                                close: TransitionSpecs.TransitionIOSSpec,
-                            },
                         }}  component={component} />
                     ))}
                 </Stack.Navigator>
@@ -84,6 +82,8 @@ function App() {
 }
 
 export default App;
+
+
 
 
 

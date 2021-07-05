@@ -1,25 +1,57 @@
 import React,{useState,useEffect} from 'react';
-import {Text, View, Button, Image, StyleSheet, Platform, Dimensions, SafeAreaView,ScrollView} from 'react-native';
+import {
+    Text,
+    View,
+    Button,
+    Image,
+    StyleSheet,
+    Platform,
+    Dimensions,
+    SafeAreaView,
+    ScrollView,
+    TouchableOpacity
+} from 'react-native';
+import NavBar from "../../common/navBar";
 
 var {width} = Dimensions.get('window');
 export default function  ServiceOrderPage({ route, navigation })
 {
+
+    // 返回中间按钮
+    const renderTitleItem=()=> {
+        return(
+            <Text style={{textAlign:'center',justifyContent:'center',marginLeft:-50}}>{route.params.name}</Text>
+        );
+    }
+
+    // 返回左边按钮
+    const renderLeftItem=()=> {
+        return(
+            <TouchableOpacity activeOpacity={0.5} onPress={()=>{navigation.goBack()}}
+            >
+                <Text style={{marginLeft:10}}>返回</Text>
+            </TouchableOpacity>
+        );
+    }
     return (
         <View style={styles.container}>
-
-                <View style={{height:100,backgroundColor:'white',marginTop:20,flexDirection:'row',justifyContent:'flex-start'}}>
-                    <Image source={require('../../assets/favicon.png')} style={{
-                        width:20,
-                        height:20,
-                        marginTop:40,
-                        marginLeft:20
-                     }}/>
-                    <View style={{marginTop:25}}>
-                        <Text style={{fontSize:10, color:'black',marginLeft:10}}>{"服务地址"}</Text>
-                        <Text style={{fontSize:13, color:'black',marginLeft:10,marginTop:5}}>{"1770000244566"}</Text>
-                        <Text style={{fontSize:13, color:'black',marginLeft:10,marginTop:5}}>{"恒大幸福家园3号楼1单元第11层1102"}</Text>
-                    </View>
+            <NavBar
+                titleItem = {() => renderTitleItem()}
+                leftItem = {() => renderLeftItem()}
+            />
+            <View style={{height:100,backgroundColor:'white',marginTop:20,flexDirection:'row',justifyContent:'flex-start'}}>
+                <Image source={require('../../assets/favicon.png')} style={{
+                    width:20,
+                    height:20,
+                    marginTop:40,
+                    marginLeft:20
+                }}/>
+                <View style={{marginTop:25}}>
+                    <Text style={{fontSize:10, color:'black',marginLeft:10}}>{"服务地址"}</Text>
+                    <Text style={{fontSize:13, color:'black',marginLeft:10,marginTop:5}}>{"1770000244566"}</Text>
+                    <Text style={{fontSize:13, color:'black',marginLeft:10,marginTop:5}}>{"恒大幸福家园3号楼1单元第11层1102"}</Text>
                 </View>
+            </View>
 
             <View style={{height:100,backgroundColor:'white',marginTop:20,flexDirection:'row',justifyContent:'flex-start'}}>
                 <Image source={require('../../assets/favicon.png')} style={{

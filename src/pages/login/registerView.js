@@ -1,5 +1,4 @@
-
-import * as React from 'react';
+import React, {useState,useRef} from "react";
 import {
     AppRegistry,
     StyleSheet,
@@ -8,21 +7,59 @@ import {
     Image,
     TextInput,
     Dimensions,
-    Button
+    Button, TouchableOpacity
 } from 'react-native';
 
 var { width, height } = Dimensions.get('window');
 
 
 export default function RegisterView({ navigation }) {
+    const passwordRef = useRef(null);
+
+    let [passWord,setPassWord] = useState("");
+    let [loginName,setLoginName] = useState("");
+
+    //密码
+    const onPasswordChanged = (newPassword) => {
+        setPassWord(newPassword);
+    };
+
+    //登录名
+    const onLoginNameChanged = (newLoginName) => {
+        setLoginName(newLoginName)
+    };
+
+    //注册
+    const register =()=>{
+
+        //TODO
+        alert("用户：" + loginName + "密码：" + passWord)
+        //返回登录
+        navigation.goBack()
+    }
     return (
         <View style={styles.container}>
             <Image source={require('../../assets/favicon.png')} style={styles.tgIconStyle} />
-            <TextInput placeholder={'  用户名/手机'} style={{ ...styles.tgTextInputStyle, marginTop: 20 }} />
-            <TextInput textContentType='password' placeholder={'  密码'} password={true} style={styles.tgTextInputStyle} />
-            <View style={styles.tgLoginBtnStyle}>
-                <Button title="注册" color='white'  onPress={() => alert("注册成功")} />
-            </View>
+            <TextInput
+                placeholder={'  用户名/手机'}
+                onChangeText={onLoginNameChanged}  //添加值改变事件
+                style={{ ...styles.tgTextInputStyle, marginTop: 20 }}
+            />
+            <TextInput
+                ref={passwordRef}  //设置描述
+                onChangeText={onPasswordChanged}  //添加值改变事件
+                style={styles.tgTextInputStyle}
+                autoCapitalize='none'  //设置首字母不自动大写
+                underlineColorAndroid={'transparent'}  //将下划线颜色改为透明
+                secureTextEntry={true}  //设置为密码输入框
+                placeholderTextColor={'#ccc'}  //设置占位符颜色
+                placeholder={'密码'}  //设置占位符
+            />
+            <TouchableOpacity activeOpacity={0.5}  onPress={() => register()}>
+                <View style={styles.tgLoginBtnStyle}>
+                    <Text style={{color:'white',textAlign:'center',justifyContent:'center'}}>{"注册"}</Text>
+                </View>
+            </TouchableOpacity>
             <View style={styles.tgSettingStyle}>
                 <Text style={{fontSize:15}} onPress={() => navigation.goBack()}>返回</Text>
             </View>

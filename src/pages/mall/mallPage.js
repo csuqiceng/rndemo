@@ -13,6 +13,7 @@ import React,{useState,useEffect} from 'react';
 import ListView from 'deprecated-react-native-listview';
 
 import {createStackNavigator} from "@react-navigation/stack";
+import NavBar from "../../common/navBar";
 var youLikeData = require('../../LocalData/mall.json');
 const {width} = Dimensions.get('window');
 
@@ -81,7 +82,7 @@ class MallMainPage extends React.Component{
         return (
             <View style={styles.container}>
                 {/* 导航栏样式 */}
-                <CommunalNavBar
+                <NavBar
                     titleItem = {() => this.renderTitleItem()}
                     rightItem = {() => this.renderRightItem()}
                 />
@@ -98,61 +99,6 @@ class MallMainPage extends React.Component{
 }
 
 
-
-class CommunalNavBar extends React.Component {
-
-
-    // 左边
-    renderLeftItem() {
-        if (this.props.leftItem === undefined) return;
-        return this.props.leftItem();
-    }
-
-    // 中间
-    renderTitleItem() {
-        if (this.props.titleItem === undefined) return;
-        return this.props.titleItem();
-    }
-
-    // 右边
-    renderRightItem() {
-        if (this.props.rightItem === undefined) return;
-        return this.props.rightItem();
-    }
-
-    render() {
-        return (
-            <View style={styles1.container}>
-                {/* 左边 */}
-                <View>
-                    {this.renderLeftItem()}
-                </View>
-                {/* 中间 */}
-                <View>
-                    {this.renderTitleItem()}
-                </View>
-                {/* 右边 */}
-                <View>
-                    {this.renderRightItem()}
-                </View>
-            </View>
-        );
-    }
-}
-
-const styles1 = StyleSheet.create({
-    container: {
-        width:width,
-        height:Platform.OS === 'ios' ? 64 : 44,
-        backgroundColor:'white',
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center',
-        borderBottomWidth:0.5,
-        borderBottomColor:'gray',
-        paddingTop:Platform.OS === 'ios' ? 15 : 0,
-    },
-});
 
 
 
@@ -229,7 +175,7 @@ export default function MallPage() {
             // headerTitle: false,
         }}>
             <Stack.Screen name="MallMainPage" options={{
-                headerTitle:false
+                headerShown: false,
             }} component={MallMainPage} />
             <Stack.Screen name="HomeScreen1" options={({ route }) => ({ title: route.params.name })} component={HomeScreen1} />
             <Stack.Screen name="HomeScreen2" options={({ route }) => ({ title: route.params.name })} component={HomeScreen2} />

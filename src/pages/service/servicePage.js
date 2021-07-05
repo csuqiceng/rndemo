@@ -47,28 +47,31 @@ function ServiceMainPage({ route, navigation }){
                 <Text style={{height:30,borderRadius:5,fontSize:11,marginTop:5,marginLeft:30}}>首次购卡满300送200元券</Text>
                 <Text style={{height:30,width:80,borderRadius:5,fontSize:11,color:'gray',marginTop:5,marginLeft:70}} onPress={()=>alert("购买")}>立即购买></Text>
             </View>
-            <View style={{flex:1,backgroundColor:'white'}}>
-                <MidCard title={"会员专享"} firstTitle={"月度保洁"} firstMsg={"专享周期保洁服务"}
-                      secondTitle={"卧室保洁"} secondMsg={"卧室保洁服务"}  onCardClick={onCardClick}></MidCard>
-            </View>
-            <View style={{flex:1,backgroundColor:'white'}}>
-                <MidCard title={"保洁服务"} firstTitle={"日常保洁"} firstMsg={"日常保洁服务"}
-                      secondTitle={"深度保洁"} secondMsg={"专业深度保洁服务"} onCardClick={onCardClick}></MidCard>
-            </View>
-            <View style={{flex:1,backgroundColor:'white',flexDirection:'column',paddingLeft:40,paddingTop:20}}>
-               <View style={{flex:1,flexDirection:'row'}}>
-                   <BottomCard text={"家电清洗"} onCardClick={onCardClick}></BottomCard>
-                   <BottomCard text={"擦玻璃"} onCardClick={onCardClick}></BottomCard>
-                   <BottomCard text={"开荒保洁"} onCardClick={onCardClick}></BottomCard>
-                   <BottomCard text={"专业除螨"} onCardClick={onCardClick}></BottomCard>
-               </View>
-                <View style={{flex:1,flexDirection:'row'}}>
-                    <BottomCard text={"消毒保洁"} onCardClick={onCardClick}></BottomCard>
-                    <BottomCard text={"名宿保洁"} onCardClick={onCardClick}></BottomCard>
-                    <BottomCard text={"企业保洁"} onCardClick={onCardClick}></BottomCard>
-                    <BottomCard text={"保洁卡"} onCardClick={onCardClick}></BottomCard>
+            <View style={{flex:2}}>
+                <View style={{flex:1,backgroundColor:'white',paddingLeft:30}}>
+                    <MidCard title={"会员专享"} firstTitle={"月度保洁"} firstMsg={"专享周期保洁服务"}
+                             secondTitle={"卧室保洁"} secondMsg={"卧室保洁服务"}  onCardClick={onCardClick}></MidCard>
+                </View>
+                <View style={{flex:1,backgroundColor:'white',paddingLeft:30}}>
+                    <MidCard title={"保洁服务"} firstTitle={"日常保洁"} firstMsg={"日常保洁服务"}
+                             secondTitle={"深度保洁"} secondMsg={"专业深度保洁服务"} onCardClick={onCardClick}></MidCard>
+                </View>
+                <View style={{flex:1,backgroundColor:'white',flexDirection:'column',paddingLeft:40,paddingTop:20}}>
+                    <View style={{flex:1,flexDirection:'row'}}>
+                        <BottomCard text={"家电清洗"} onCardClick={onCardClick}></BottomCard>
+                        <BottomCard text={"擦玻璃"} onCardClick={onCardClick}></BottomCard>
+                        <BottomCard text={"开荒保洁"} onCardClick={onCardClick}></BottomCard>
+                        <BottomCard text={"专业除螨"} onCardClick={onCardClick}></BottomCard>
+                    </View>
+                    <View style={{flex:1,flexDirection:'row'}}>
+                        <BottomCard text={"消毒保洁"} onCardClick={onCardClick}></BottomCard>
+                        <BottomCard text={"名宿保洁"} onCardClick={onCardClick}></BottomCard>
+                        <BottomCard text={"企业保洁"} onCardClick={onCardClick}></BottomCard>
+                        <BottomCard text={"保洁卡"} onCardClick={onCardClick}></BottomCard>
+                    </View>
                 </View>
             </View>
+
         </View>
     )
 }
@@ -125,11 +128,13 @@ const Stack = createStackNavigator();
 
 export default function ServicePage() {
     return (
-        <Stack.Navigator screenOptions={{
-            // headerTitle: false,
+        <Stack.Navigator
+            initialRouteName="ServicePage"
+            headerMode="screen"
+            screenOptions={{
+            headerShown: false
         }}>
             <Stack.Screen name="ServicePage" options={{
-                headerTitle:false
             }} component={ServiceMainPage} />
             <Stack.Screen name="ServiceOrderPage" options={({ route }) => ({ title: route.params.name })} component={ServiceOrderPage} />
             <Stack.Screen name="ServiceConfirmPage" options={({ route }) => ({ title: route.params.name })} component={ServiceConfirmPage} />
@@ -144,12 +149,10 @@ const styles = StyleSheet.create(
             flex: 1,
             // marginLeft:20,
             // marginRight:20,
-            backgroundColor:'white'
         },
 
         wrapper: {
             backgroundColor:'orange',
-            // height:200
         },
 
         slide: {
