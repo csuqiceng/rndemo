@@ -18,7 +18,7 @@ function ServiceMainPage({ route, navigation }){
             <Swiper
                 style={styles.wrapper}
                 autoplay
-                onMomentumScrollEnd={(e, state, context) => console.log('index:', state.index)}
+                onMomentumScrollEnd={(e, state, context) => {}}
                 dot={<View style={{backgroundColor:'rgba(0,0,0,.5)', width: 8, height: 8,borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3,}} />}
                 activeDot={<View style={{backgroundColor: 'yellow', width: 8, height: 8, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3}} />}
                 paginationStyle={{
@@ -126,7 +126,7 @@ function BottomCard(props)
 
 const Stack = createStackNavigator();
 
-export default function ServicePage() {
+export default function ServicePage({ navigation, route }) {
     return (
         <Stack.Navigator
             initialRouteName="ServicePage"

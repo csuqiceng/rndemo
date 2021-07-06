@@ -10,7 +10,7 @@ import {
 import MyCell from './commonMineCell'
 import MineHeaderView from './mineHeaderView'
 import MineMiddleView from './mineMiddleView'
-export default function Mine(){
+export default function MinePage(){
         return (
             <View style={styles.container}>
                 <ScrollView

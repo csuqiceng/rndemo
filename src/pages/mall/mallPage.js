@@ -14,6 +14,7 @@ import ListView from 'deprecated-react-native-listview';
 
 import {createStackNavigator} from "@react-navigation/stack";
 import NavBar from "../../common/navBar";
+import fetchData from "../../common/fetch";
 var youLikeData = require('../../LocalData/mall.json');
 const {width} = Dimensions.get('window');
 
@@ -75,7 +76,22 @@ class MallMainPage extends React.Component{
     }
 
     componentDidMount() {
-        this.fetchData();
+        // this.fetchData();
+
+        // let param = {
+        //     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        //     headers: {
+        //         'X-Dts-Token': token,
+        //         'content-type': 'application/json'
+        //     },
+        //     method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        // }
+        // let url = 'http://lhh.natapp1.cc/mengqi/wx/home/index';
+        // const  callback =(responseData)=>{
+        //     // setToken(responseData.data.token)
+        //     // navigation.navigate('Home')
+        // }
+        // fetchData(url,param,token,callback);
     }
 
     render() {

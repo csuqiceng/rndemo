@@ -10,16 +10,19 @@ import {
     TouchableOpacity,
     Dimensions
 } from 'react-native';
+import fetchData from "../../common/fetch";
 
 var {width,height} = Dimensions.get('window');
 
 
 export default function LoginView({ navigation }) {
 
+
     let [passWord,setPassWord] = useState("");
 
     let [loginName,setLoginName] = useState("");
 
+    let [token,setToken] = useState("6533936kurgh11wvf1sd89ew48x2ryko");
     //密码
     const onPasswordChanged = (newPassword) => {
         setPassWord(newPassword);
@@ -30,13 +33,29 @@ export default function LoginView({ navigation }) {
         setLoginName(newLoginName)
     };
 
-    //注册
-    const login =()=>{
-
-        //TODO
-        alert("用户：" + loginName + "密码：" + passWord)
+    //登录
+    const login = ()=>{
         //返回登录
-        navigation.navigate('Home')
+        let data = {
+            "username": loginName,
+            "password": passWord,
+        }
+        let param = {
+            body: JSON.stringify(data), // must match 'Content-Type' header
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            headers: {
+            'X-Dts-Token': token,
+                'content-type': 'application/json'
+        },
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        }
+        let url = 'http://lhh.natapp1.cc/mengqi/wx/auth/login';
+        const  callback =(responseData)=>{
+            setToken(responseData.data.token)
+            navigation.navigate('Home', { token: responseData.data.token })
+        }
+        fetchData(url,param,token,callback);
+        console.log(JSON.stringify(token))
     }
     return (
         <View style={styles.container}>

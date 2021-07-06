@@ -39,6 +39,15 @@ function HomeScreen3({ navigation }) {
 window.isLogin = false;
 
 function App() {
+    const navigationRef = React.useRef(null);
+
+    const unsubscribe = navigationRef.current?.addListener('state', (e) => {
+        // You can get the raw navigation state (partial state object of the root navigator)
+        console.log(e.data.state);
+
+        // Or get the full state object with `getRootState()`
+        // console.log(navigationRef.current.getRootState());
+    });
     // Define multiple groups of screens in objects like this
     const HomeScreens = {
         Home: MainPage,
@@ -60,6 +69,7 @@ function App() {
     }else{
         return (
             <NavigationContainer
+                ref={navigationRef}
             >
                 <Stack.Navigator
                 screenOptions={{
@@ -70,8 +80,7 @@ function App() {
                         // Use the screens normally
                         ...SignScreens,
                     }).map(([name, component]) => (
-                        <Stack.Screen name={name}  options={{
-                        }}  component={component} />
+                        <Stack.Screen name={name}   component={component} />
                     ))}
                 </Stack.Navigator>
             </NavigationContainer>
