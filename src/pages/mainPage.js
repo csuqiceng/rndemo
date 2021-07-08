@@ -8,15 +8,15 @@ const Tab = createBottomTabNavigator();
 
 export default function MainPage({ navigation, route }) {
 
-    // const  Service =()=>{
-    //     return<ServicePage token={route.params.token}/>
-    // }
-    // const  Mall =()=>{
-    //     return<MallPage token={route.params.token}/>
-    // }
-    // const  Mine =()=>{
-    //     return<MinePage token={route.params.token}/>
-    // }
+    const  Service =()=>{
+        return<ServicePage token={route.params.token}/>
+    }
+    const  Mall =()=>{
+        return<MallPage token={route.params.token}/>
+    }
+    const  Mine =()=>{
+        return<MinePage token={route.params.token}/>
+    }
     return (
       <Tab.Navigator  screenOptions={{
           headerShown: false,

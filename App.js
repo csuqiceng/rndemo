@@ -80,7 +80,7 @@ function App() {
                         // Use the screens normally
                         ...SignScreens,
                     }).map(([name, component]) => (
-                        <Stack.Screen name={name}   component={component} />
+                        <Stack.Screen name={name} key={name}  component={component} />
                     ))}
                 </Stack.Navigator>
             </NavigationContainer>

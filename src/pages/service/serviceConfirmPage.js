@@ -140,7 +140,9 @@ function Toolbar(props) {
         <View style={{height:40,flexDirection:'row'}}>
             {
                 data.infos.map((item,index)=>(
-                    <Text style={{
+                    <Text
+                        key={index}
+                        style={{
                         flex:1,textAlign:'center',
                         marginTop:10,
                         color:props.data === item.key?'orange':'black',
