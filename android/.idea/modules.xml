@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mengqi.iml" filepath="$PROJECT_DIR$/.idea/modules/mengqi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/mengqi.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/mengqi.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1432537616/mengqi.react-native-community_masked-view.iml" filepath="$PROJECT_DIR$/.idea/modules/1432537616/mengqi.react-native-community_masked-view.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-2109395769/mengqi.react-native-gesture-handler.iml" filepath="$PROJECT_DIR$/.idea/modules/-2109395769/mengqi.react-native-gesture-handler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-481668875/mengqi.react-native-reanimated.iml" filepath="$PROJECT_DIR$/.idea/modules/-481668875/mengqi.react-native-reanimated.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/746598256/mengqi.react-native-safe-area-context.iml" filepath="$PROJECT_DIR$/.idea/modules/746598256/mengqi.react-native-safe-area-context.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1373313928/mengqi.react-native-screens.iml" filepath="$PROJECT_DIR$/.idea/modules/1373313928/mengqi.react-native-screens.iml" />
+    </modules>
+  </component>
+</project>

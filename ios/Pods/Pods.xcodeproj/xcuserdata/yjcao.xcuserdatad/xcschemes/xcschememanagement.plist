@@ -74,22 +74,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-AwesomeProject-AwesomeProjectTests.xcscheme</key>
+		<key>Pods-mengqi-mengqiTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-AwesomeProject-tvOS.xcscheme</key>
+		<key>Pods-mengqi-tvOS.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-AwesomeProject-tvOSTests.xcscheme</key>
+		<key>Pods-mengqi-tvOSTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-AwesomeProject.xcscheme</key>
+		<key>Pods-mengqi.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
