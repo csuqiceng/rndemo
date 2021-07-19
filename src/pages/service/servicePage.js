@@ -1,79 +1,182 @@
 import {createStackNavigator, TransitionSpecs} from '@react-navigation/stack';
 import React, {useState} from "react";
 import Swiper from 'react-native-swiper';
-import {Text, View, StyleSheet, Image ,Dimensions,TouchableOpacity} from "react-native";
+import {Text, View,TextInput, StyleSheet, Image ,Dimensions,TouchableOpacity,SafeAreaView ,ScrollView ,StatusBar,FlatList,TouchableHighlight} from "react-native";
 import ServiceConfirmPage from "./serviceConfirmPage";
 import ServiceOrderPage from "./serviceOrderPage";
+import {mainServerData,hotServerData,preferentialData} from '../../LocalData/homePageData'
+
 const {width} = Dimensions.get('window');
 
-function ServiceMainPage({ route, navigation }){
-
-    const onCardClick = (data) =>{
-        if(data){
-            navigation.navigate('ServiceConfirmPage', { name: data })
+const swiperData =[
+    { title: '1', image: require("../../assets/images/home_banner.png") },
+    { title: '2', image: require("../../assets/images/home_banner.png") },
+    { title: '3', image: require("../../assets/images/home_banner.png") },
+]
+class ServiceMainPage extends React.Component{
+    constructor() {
+        super();
+        this.state={
+            searchInput:'',
+            dataSource: '',
         }
     }
-    return(
-        <View style={styles.container}>
-            <Swiper
-                style={styles.wrapper}
-                autoplay
-                onMomentumScrollEnd={(e, state, context) => {}}
-                dot={<View style={{backgroundColor:'rgba(0,0,0,.5)', width: 8, height: 8,borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3,}} />}
-                activeDot={<View style={{backgroundColor: 'yellow', width: 8, height: 8, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3}} />}
-                paginationStyle={{
-                    top: -290, left: null, right: 10
-                }}
-                loop>
-                <View style={styles.slide} >
-                    <Text numberOfLines={1}>Aussie tourist dies at Bali hotel</Text>
-                    <Image resizeMode='stretch' style={styles.image} source={require('../../assets/favicon.png')} />
+
+    onCardClick = (data) =>{
+        if(data){
+            this.props.navigation.navigate('ServiceConfirmPage', { name: data })
+        }
+    }
+    onChangeNumber= (value)=>{
+        this.setState({
+            searchInput:value
+        })
+    }
+    onChangeText=(text)=> {
+        if (text) {
+            this.setState({ inputValue: text })  //实时变化值
+            clearTimeout(this.settimeId);       //如搜索的内容变化在1秒之中，可以清除变化前的fetch请求，继而减少fetch请求。但不能中断fetch请求
+            this.settimeId = setTimeout(() => {
+                var jsonData = {
+                    "sessionId": global.appInfo.sessionId,
+                    "merchName": text,
+                };
+                console.log(jsonData)
+                // fetchData('nsposm/B1404/queryMerchList', jsonData, this.SearchCallback);
+            }, 1000);   //让每次要进行fetch请求时先延迟1秒在进行
+            console.log("sheng chen id:" + this.settimeId);
+
+        } else {
+            this.setState({inputValue: '' })
+        }
+
+    }
+
+    componentDidMount() {
+
+    }
+
+    render() {
+        return(
+            <View style={styles.container}>
+                <View style={{height:40,
+                    flexDirection: 'column',
+                    justifyContent: 'center',}}>
+                    <Text
+                        style={{
+                            textAlign:'center',
+                            fontSize: 18,fontWeight:'700',
+                            backgroundColor:'white',
+                            includeFontPadding: false,
+                            textAlignVertical: 'center',
+                            flex:1
+                        }}
+                    >首页</Text>
                 </View>
-                <View style={styles.slide}>
-                    <Text numberOfLines={1}>Big lie behind Nine’s new show</Text>
-                    <Image resizeMode='stretch' style={styles.image} source={require('../../assets/favicon.png')} />
-                </View>
-                <View style={styles.slide} >
-                    <Text numberOfLines={1}>Why Stone split from Garfield</Text>
-                    <Image resizeMode='stretch' style={styles.image} source={require('../../assets/favicon.png')} />
-                </View>
-                <View style={styles.slide}>
-                    <Text numberOfLines={1}>Learn from Kim K to land that job</Text>
-                    <Image resizeMode='stretch' style={styles.image} source={require('../../assets/favicon.png')} />
-                </View>
-            </Swiper>
-            <View style={{height:30,backgroundColor:'white',flexDirection:'row',marginBottom:1,paddingTop:4,shadowColor:'gray',shadowOffset:{width:0,height:0},shadowOpacity:1,shadowRadius:1.5}}>
-                <Text style={{height:13,marginTop:5,width:30,borderRadius:5,backgroundColor:'red',color:'white',fontSize:11,marginLeft:20}}>优惠</Text>
-                <Text style={{height:30,borderRadius:5,fontSize:11,marginTop:5,marginLeft:30}}>首次购卡满300送200元券</Text>
-                <Text style={{height:30,width:80,borderRadius:5,fontSize:11,color:'gray',marginTop:5,marginLeft:70}} onPress={()=>alert("购买")}>立即购买></Text>
-            </View>
-            <View style={{flex:2}}>
-                <View style={{flex:1,backgroundColor:'white',paddingLeft:30}}>
-                    <MidCard title={"会员专享"} firstTitle={"月度保洁"} firstMsg={"专享周期保洁服务"}
-                             secondTitle={"卧室保洁"} secondMsg={"卧室保洁服务"}  onCardClick={onCardClick}></MidCard>
-                </View>
-                <View style={{flex:1,backgroundColor:'white',paddingLeft:30}}>
-                    <MidCard title={"保洁服务"} firstTitle={"日常保洁"} firstMsg={"日常保洁服务"}
-                             secondTitle={"深度保洁"} secondMsg={"专业深度保洁服务"} onCardClick={onCardClick}></MidCard>
-                </View>
-                <View style={{flex:1,backgroundColor:'white',flexDirection:'column',paddingLeft:40,paddingTop:20}}>
-                    <View style={{flex:1,flexDirection:'row'}}>
-                        <BottomCard text={"家电清洗"} onCardClick={onCardClick}></BottomCard>
-                        <BottomCard text={"擦玻璃"} onCardClick={onCardClick}></BottomCard>
-                        <BottomCard text={"开荒保洁"} onCardClick={onCardClick}></BottomCard>
-                        <BottomCard text={"专业除螨"} onCardClick={onCardClick}></BottomCard>
+                    <View style={{ height: 40, backgroundColor: "#fff", borderRadius: 0, paddingLeft: 25, flexDirection: 'row', alignItems: 'center',margin:5 }} >
+                        <Image source={require('../../assets/images/home_icon_search.png')} style={{ width: 15, height: 15 }}></Image>
+                        <TextInput underlineColorAndroid="transparent" placeholder="请输入关键词" style={{ marginLeft: 10, width: 150}}
+                                   onChangeText={this.onChangeText}
+                                   value={this.state.inputValue}
+                                   ref="keyWordInput"
+                                   onSubmitEditing={() => { this.refs.keyWordInput.blur() }}>
+                        </TextInput>
+                        <TouchableOpacity onPress={() => { dismissKeyboard() }} style={{flex:1}}>
+                            <Text style={{ color: '#0391ff', fontSize: 14,textAlign:'right' ,marginRight:20 }}>搜索</Text>
+                        </TouchableOpacity>
                     </View>
-                    <View style={{flex:1,flexDirection:'row'}}>
-                        <BottomCard text={"消毒保洁"} onCardClick={onCardClick}></BottomCard>
-                        <BottomCard text={"名宿保洁"} onCardClick={onCardClick}></BottomCard>
-                        <BottomCard text={"企业保洁"} onCardClick={onCardClick}></BottomCard>
-                        <BottomCard text={"保洁卡"} onCardClick={onCardClick}></BottomCard>
-                    </View>
-                </View>
+                <SafeAreaView style={{flex:1}}>
+                    <ScrollView style={styles.scrollView} showsVerticalScrollIndicator ={false}>
+
+                        {/*Swiper*/}
+                        <Swiper
+                            style={styles.wrapper}
+                            autoplay
+                            onMomentumScrollEnd={(e, state, context) => {}}
+                            dot={<View style={{backgroundColor:'rgba(0,0,0,.5)', width: 8, height: 8,borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3,}} />}
+                            activeDot={<View style={{backgroundColor: 'yellow', width: 8, height: 8, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3}} />}
+                            paginationStyle={{
+                                top: -290, left: null, right: 10
+                            }}
+                            loop>
+                            {
+                                swiperData.map((item,i)=>{
+                                    return (
+                                        <View style={styles.slide} key={i}>
+                                            {/*<Text numberOfLines={1}>Learn from Kim K to land that job</Text>*/}
+                                            <Image resizeMode='stretch' style={styles.image} source={item.image} />
+                                        </View>
+                                    )
+                                })
+                            }
+                        </Swiper>
+
+                        {/*主要服务*/}
+
+                        <View style={{flex:1,flexDirection:'row',marginLeft:15,marginTop:15}}>
+                            {
+                                mainServerData.map((item,i)=>{
+                                    return <BottomMainCard text={item.title} key={item.title} onCardClick={this.onCardClick} image={item.image}></BottomMainCard>
+                                })
+                            }
+                        </View>
+
+                        {/*热门服务*/}
+                        <View>
+                            <View style={{ height: 40, flexDirection: 'row', alignItems: 'center',marginLeft:10}} >
+                                <Image source={require('../../assets/images/home_icon_line.png')} style={{ width: 5, height: 30 }}></Image>
+                                <Text style={{  fontSize: 17,marginLeft:10}}>热门服务</Text>
+                            </View>
+                            <ScrollView horizontal={true} showsHorizontalScrollIndicator = {false}  style={{margin: 15}}>
+                                {
+                                    hotServerData.map((item,i)=>{
+                                        return(
+                                            <View key={item.title} style={{paddingRight:10}}>
+                                                <BottomHotCard text={item.title} key={item.title} subtitle={item.subtitle} onCardClick={this.onCardClick} image={item.image}></BottomHotCard>
+                                            </View>
+                                        )
+                                    })
+                                }
+                            </ScrollView>
+                        </View>
+                        {/*特惠优选*/}
+                        <View>
+                            <View style={{ height: 40, flexDirection: 'row', alignItems: 'center',marginLeft:10,marginRight: 10,marginBottom:10}} >
+                                <Image source={require('../../assets/images/home_icon_line.png')} style={{ width: 5, height: 30 }}></Image>
+                                <Text style={{  fontSize: 17,marginLeft:10}}>特惠优选</Text>
+                            </View>
+                            {
+                                preferentialData.map((item,i)=>{
+                                    return(
+                                        <TouchableHighlight
+                                            key={item.name}
+                                            activeOpacity={0.6}
+                                            underlayColor="#DDDDDD"
+                                            onPress={() => alert('Pressed!')}>
+                                        <View style={{ backgroundColor: 'white' ,flexDirection:'row' ,marginBottom:10}} key={item.name}>
+                                            <Image  source={{uri:item.picUrl}} style={{height:110,width:150,borderWidth: 1,borderColor:'white',borderRadius:4}} />
+                                            <View style={{margin: 10}}>
+                                                <Text  numberOfLines={3} style={{width:width * 0.5,fontSize: 13,height:30}}>{item.name}</Text>
+                                                <View style={{flexDirection:'row',marginTop:40}}>
+                                                    <Text  numberOfLines={3} style={{fontSize: 15,color:'#ff6600'}}>¥ {item.retailPrice}</Text>
+                                                    <Text  numberOfLines={3} style={{fontSize: 13,textDecorationLine:'line-through',color:'gray',paddingTop:2,paddingLeft:10}}>¥ {item.counterPrice}</Text>
+                                                </View>
+                                            </View>
+                                        </View>
+                                        </TouchableHighlight>
+                                    )
+                                })
+                            }
+
+                        </View>
+
+                    </ScrollView>
+                </SafeAreaView>
             </View>
 
-        </View>
-    )
+        )
+    }
+
 }
 
 
@@ -107,17 +210,35 @@ function MidCard(props)
     )
 }
 
-function BottomCard(props)
+function BottomMainCard(props)
 {
     return(
         <TouchableOpacity activeOpacity={0.5} style={{flex:1}} onPress={()=>{props.onCardClick(props.text)}}>
-            <View style={{width:100,height:100,flexDirection:'column'}}>
-                <Image source={require('../../assets/favicon.png')}
+            <View style={{width:100,height:80,flexDirection:'column'}}>
+                <Image source={props.image}
                        style={{
                            width:50,
-                           height:24,
+                           height:50,
                            }}/>
                 <Text style={{width:100}}>{props.text}</Text>
+            </View>
+        </TouchableOpacity>
+    )
+}
+
+
+function BottomHotCard(props)
+{
+    return(
+        <TouchableOpacity activeOpacity={0.5} style={{flex:1}} onPress={()=>{props.onCardClick(props.text)}}>
+            <View style={{width:120,height:130,flexDirection:'column'}}>
+                <Image source={props.image}
+                       style={{
+                           width:120,
+                           height:88,
+                       }}/>
+                <Text style={{width:120,textAlign:'center',fontSize: 15}}>{props.text}</Text>
+                <Text style={{width:120,textAlign:'center',fontSize: 12,color:'gray'}}>{props.subtitle}</Text>
             </View>
         </TouchableOpacity>
     )
@@ -147,16 +268,20 @@ const styles = StyleSheet.create(
     {
         container: {
             flex: 1,
-            // marginLeft:20,
-            // marginRight:20,
+            paddingTop: StatusBar.currentHeight,
+            backgroundColor:'white'
         },
-
+        scrollView: {
+            // backgroundColor: 'pink',
+            // marginHorizontal: 20,
+        },
         wrapper: {
-            backgroundColor:'orange',
+            height:150,
+            backgroundColor:'#22DDDD',
         },
 
         slide: {
-            height:100,
+            height:200,
             justifyContent: 'center',
             backgroundColor: 'transparent'
         },
@@ -177,6 +302,17 @@ const styles = StyleSheet.create(
         image: {
             width:width,
             flex: 1
+        }
+        ,
+        input: {
+            height: 40,
+            margin: 12,
+            borderWidth: 1,
+        },
+        arrowStyle: {
+            width:10,
+            height:10,
+            marginRight:30
         }
     }
 )

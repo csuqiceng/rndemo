@@ -60,7 +60,7 @@ function App() {
     };
 
 
-    if(0){
+    if(1){
         return (
             <NavigationContainer>
                 <MainPage></MainPage>

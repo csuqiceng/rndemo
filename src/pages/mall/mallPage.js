@@ -76,7 +76,7 @@ class MallMainPage extends React.Component{
     }
 
     componentDidMount() {
-        // this.fetchData();
+        this.fetchData();
 
         // let param = {
         //     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -131,8 +131,6 @@ class CommunalHotCell extends React.Component {
                 <View style={{marginRight:15}}>
                     <Text numberOfLines={3} style={styles2.titleStyle}>{this.props.title}</Text>
                 </View>
-                {/* 右边的箭头 */}
-                {/*<Image source={{uri:'icon_cell_rightArrow'}} style={styles2.arrowStyle} />*/}
             </View>
         );
     }
