@@ -11,12 +11,15 @@ import {
     ScrollView,
     TouchableOpacity,
     StatusBar,
-    Alert
+    Alert,
+    Modal,
+    Pressable,
+    TouchableHighlight
 } from 'react-native';
 import Swiper from 'react-native-swiper';
 import NavBar from "../../common/navBar";
-
-var {width} = Dimensions.get('window');
+// var Spinner = require('rn-spinner');
+var {width,height} = Dimensions.get('window');
 
 const swiperData =[
     { title: '1', image: require("../../assets/images/home_banner.png") },
@@ -28,6 +31,12 @@ export default class ServiceConfirmPage extends React.Component
 {
     constructor() {
         super();
+        this.state={
+            modalVisible:false,
+            choose:true,
+            serviceItemName:'',
+            serviceItemCount:''
+        }
     }
     // 返回中间按钮
      renderTitleItem=()=> {
@@ -59,9 +68,17 @@ export default class ServiceConfirmPage extends React.Component
             this.props.navigation.navigate('ServiceOrderPage', { name: data })
         }
     }
+    setModalVisible = (visible) => {
+        this.setState({ modalVisible: visible });
+    }
     render() {
+        const { modalVisible ,serviceItemCount,serviceItemName } = this.state;
+        let chooseMeg =  `请选择  服务项目`
+        if (serviceItemName.length > 0 && serviceItemCount.length >0){
+            chooseMeg =  `已选 ${serviceItemName}  数量${serviceItemCount}`
+        }
         return (
-            <View style={styles.container}>
+            <View style={styles.container} onPress={()=>{this.setModalVisible(!modalVisible)}}>
                 {/*自定义导航栏*/}
                 <NavBar
                     titleItem = {() => this.renderTitleItem()}
@@ -99,9 +116,9 @@ export default class ServiceConfirmPage extends React.Component
                                 <View style={{flexDirection:'row',marginTop:10}}>
                                     <View style={{flexDirection:'row'}}>
                                         <Text  numberOfLines={3} style={{fontSize: 15,color:'#ff6600',paddingTop:10}}>¥ </Text>
-                                        <Text  numberOfLines={3} style={{fontSize: 25,color:'#ff6600'}}>{118.00}</Text>
+                                        <Text  numberOfLines={3} style={{fontSize: 25,color:'#ff6600'}}>{'118.00'}</Text>
                                     </View>
-                                    <Text  numberOfLines={3} style={{fontSize: 13,textDecorationLine:'line-through',color:'gray',paddingTop:10,paddingLeft:10}}>¥ {200.00}</Text>
+                                    <Text  numberOfLines={3} style={{fontSize: 13,textDecorationLine:'line-through',color:'gray',paddingTop:10,paddingLeft:10}}>¥ {"200.00"}</Text>
                                 </View>
 
                                 <View style={{flexDirection:'row',marginTop: 10}}>
@@ -109,13 +126,43 @@ export default class ServiceConfirmPage extends React.Component
                                     <Text style={{width:100,height:20,borderColor:'#A38705',color: '#A38705',borderRadius:2,borderWidth:1,textAlign: 'center',marginLeft: 10}}>购买得积分</Text>
                                     <View style={{flex:1}}></View>
                                     <TouchableOpacity onPress={() => { dismissKeyboard() }} style={{flexDirection:'row' ,marginRight:10}}>
-                                        <Text style={{ color: '#333333', fontSize: 17,fontWeight:'300',marginRight:10}}>领券</Text>
+                                        <Text style={{ color: '#333333', fontSize: 15,fontWeight:'300',marginRight:10}}>领券</Text>
                                         <Image style={{ width: 10, height: 20 }} source={require('../../assets/images/goto.png')} />
                                     </TouchableOpacity>
                                 </View>
                             </View>
-                            <View style={{backgroundColor:'white',marginTop: 10,height:60}}>
 
+                            <View style={{
+                                height:60,
+                                flexDirection: 'column',
+                                // justifyContent: 'center',
+                                flexDirection:'row',
+                                backgroundColor:'white',
+                                marginTop: 10
+                            }}>
+                                <Text
+                                    style={{
+                                        fontSize: 13,
+                                        fontWeight:'700',
+                                        includeFontPadding: false,
+                                        textAlignVertical: 'center',
+                                        paddingLeft:15,
+                                        color: 'gray',
+                                        flex:1
+                                    }}
+                                >选择规格参数</Text>
+                                <TouchableOpacity onPress={()=>this.setModalVisible(!modalVisible)} style={{flexDirection:'row' ,marginRight:25}}>
+                                <Text
+                                    style={{
+                                        fontSize: 13,
+                                        fontWeight:'700',
+                                        includeFontPadding: false,
+                                        textAlignVertical: 'center',
+                                        marginRight: 10,
+                                    }}
+                                >{chooseMeg}</Text>
+                                <Image style={{ width: 10, height: 20 ,marginTop: 20}} source={require('../../assets/images/goto.png')} />
+                                </TouchableOpacity>
                             </View>
                             <View style={{backgroundColor:'white',marginTop: 10,backgroundColor:'gray'}}>
                                 <Text style={{textAlign: 'center',fontWeight:'300',fontSize:15,marginTop: 20 ,color: '#666666'}}>{'---商品详情---'}</Text>
@@ -126,11 +173,12 @@ export default class ServiceConfirmPage extends React.Component
                         </View>
                     </ScrollView>
                 </SafeAreaView>
+
                 <View style={{height:40,flexDirection:'row',justifyContent:'flex-end',margin: 10}}>
                     <Button
                         color="#272C2E"
                         title="加入购物车"
-                        onPress={() => Alert.alert('Right button pressed')}
+                        onPress={()=>{this.showPopupView()}}
                     />
                     <Button
                         color="#00BEAF"
@@ -138,6 +186,60 @@ export default class ServiceConfirmPage extends React.Component
                         onPress={() => Alert.alert('Right button pressed')}
                     />
                 </View>
+
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                    hardwareAccelerated={true}
+                    onRequestClose={() => {
+                        this.setModalVisible(!modalVisible);
+                    }}
+                >
+                        <View  style={styles.centeredView}>
+                            <View  style={styles.modalView}>
+
+                                <View style={{height:90 ,flexDirection:'row' ,marginTop: 7}}>
+                                    <Image style={{ width: 60, height: 60}} source={require('../../assets/images/home_banner.png')} />
+                                    <View style={{marginLeft: 10}}>
+                                        <Text style={{color: '#333333',fontSize:20}}>{this.props.route.params.name}</Text>
+                                        <View style={{flexDirection:'row'}}>
+                                            <View style={{flexDirection:'row'}}>
+                                                <Text  numberOfLines={3} style={{fontSize: 15,color:'#ff6600',paddingTop:10}}>¥ </Text>
+                                                <Text  numberOfLines={3} style={{fontSize: 25,color:'#ff6600'}}>{"118.00"}</Text>
+                                            </View>
+                                            <Text  numberOfLines={3} style={{fontSize: 13,textDecorationLine:'line-through',color:'gray',paddingTop:10,paddingLeft:10}}>¥ {"200.00"}</Text>
+                                        </View>
+                                    </View>
+                                </View>
+
+                                <View>
+                                    <Text style={{fontSize:20,fontWeight:"800"}}>服务项目</Text>
+                                    <View style={{flexDirection:'row',marginTop: 10}}>
+                                        <Text style={{width:100,height:30,borderColor:this.state.choose?'#00BEAF':'gray',color: 'black',borderRadius:2,borderWidth:1,textAlign: 'center',textAlignVertical: 'center'}}>满200减20</Text>
+                                        <Text style={{width:100,height:30,borderColor:'gray',color: 'black',borderRadius:2,borderWidth:1,textAlign: 'center',marginLeft: 10,textAlignVertical: 'center',}}>购买得积分</Text>
+                                    </View>
+                                    <View>
+                                        <Text style={{fontSize:20,fontWeight:"800"}}>数量</Text>
+
+                                    </View>
+                                </View>
+
+                                <View style={{height:40,flexDirection:'row',justifyContent:'flex-end',margin: 10}}>
+                                    <Button
+                                        color="#272C2E"
+                                        title="确认"
+                                        onPress={()=>{this.showPopupView()}}
+                                    />
+                                    <Button
+                                        color="#00BEAF"
+                                        title="返回"
+                                        onPress={() => this.setModalVisible(!modalVisible)}
+                                    />
+                                </View>
+                            </View>
+                        </View>
+                </Modal>
             </View>
         );
     }
@@ -388,5 +490,26 @@ const styles = StyleSheet.create({
 
         borderRightWidth:1,
         borderRightColor:'white'
-    }
+    },
+    centeredView: {
+        flex:1,
+        justifyContent: "flex-end",
+        // alignItems: "center",
+    },
+    modalView: {
+        backgroundColor: "white",
+        height:410,
+        width:width,
+        borderRadius: 10,
+        padding: 15,
+        // alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    },
 });
