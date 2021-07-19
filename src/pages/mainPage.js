@@ -48,7 +48,7 @@ export default class MainPage extends React.Component{
                          )
                      }}/>
                      <Tab.Screen name="Classify" component={MallPage} options={{
-                         tabBarVisible:false,
+                         // tabBarVisible:false,
                          tabBarLabel: '分类',
                          tabBarIcon: ({ focused, tintColor }) => (
                              <Image
