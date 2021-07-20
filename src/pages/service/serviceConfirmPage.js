@@ -18,7 +18,8 @@ import {
 } from 'react-native';
 import Swiper from 'react-native-swiper';
 import NavBar from "../../common/navBar";
-// var Spinner = require('rn-spinner');
+import Stepper from '@ant-design/react-native/lib/stepper';
+import fetchData from '../../common/fetch'
 var {width,height} = Dimensions.get('window');
 
 const swiperData =[
@@ -71,6 +72,22 @@ export default class ServiceConfirmPage extends React.Component
     setModalVisible = (visible) => {
         this.setState({ modalVisible: visible });
     }
+
+    componentDidMount() {
+        let param = {
+            headers: {
+                'X-Litemall-Token': 'q1hs6w5tskdn07tscq8e7ext4pin4jx8',
+                'content-type': 'application/x-www-form-urlencoded'
+            },
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        }
+        let url = `http://lhh.natapp1.cc/wx/goods/detail?id=1181008`;
+        const  callback =(responseData)=>{
+            console.log(JSON.stringify(responseData))
+        }
+        fetchData(url,param,'q1hs6w5tskdn07tscq8e7ext4pin4jx8',callback);
+    }
+
     render() {
         const { modalVisible ,serviceItemCount,serviceItemName } = this.state;
         let chooseMeg =  `请选择  服务项目`
@@ -197,8 +214,14 @@ export default class ServiceConfirmPage extends React.Component
                     }}
                 >
                         <View  style={styles.centeredView}>
-                            <View  style={styles.modalView}>
+                            <TouchableOpacity
+                                activeOpacity={.8}
+                                style={{flex:1}}
+                                onPress={() => this.setModalVisible(!modalVisible)}
+                            >
+                            </TouchableOpacity>
 
+                            <View  style={styles.modalView}>
                                 <View style={{height:90 ,flexDirection:'row' ,marginTop: 7}}>
                                     <Image style={{ width: 60, height: 60}} source={require('../../assets/images/home_banner.png')} />
                                     <View style={{marginLeft: 10}}>
@@ -216,27 +239,39 @@ export default class ServiceConfirmPage extends React.Component
                                 <View>
                                     <Text style={{fontSize:20,fontWeight:"800"}}>服务项目</Text>
                                     <View style={{flexDirection:'row',marginTop: 10}}>
-                                        <Text style={{width:100,height:30,borderColor:this.state.choose?'#00BEAF':'gray',color: 'black',borderRadius:2,borderWidth:1,textAlign: 'center',textAlignVertical: 'center'}}>满200减20</Text>
-                                        <Text style={{width:100,height:30,borderColor:'gray',color: 'black',borderRadius:2,borderWidth:1,textAlign: 'center',marginLeft: 10,textAlignVertical: 'center',}}>购买得积分</Text>
+                                        <Text style={{width:100,height:30,borderColor:this.state.choose?'#00BEAF':'gray',color: 'black',borderRadius:2,borderWidth:1,textAlign: 'center',textAlignVertical: 'center'}}>家庭日常保洁</Text>
+                                        <Text style={{width:100,height:30,borderColor:'gray',color: 'black',borderRadius:2,borderWidth:1,textAlign: 'center',marginLeft: 10,textAlignVertical: 'center',}}>新居开荒</Text>
                                     </View>
-                                    <View>
-                                        <Text style={{fontSize:20,fontWeight:"800"}}>数量</Text>
-
+                                    <View style={{flexDirection:'row',height:50,marginTop: 20}}>
+                                        <Text style={{fontSize:20,fontWeight:"800",flex:2,marginTop: 10}}>购买数量</Text>
+                                        <Stepper
+                                            key="1"
+                                            max={10}
+                                            min={0}
+                                            defaultValue={1}
+                                            style={{flex:1}}
+                                            // onChange={onChange}
+                                        />
                                     </View>
                                 </View>
 
+                                <TouchableOpacity activeOpacity={0.5} style={{flex:1}} onPress={() => this.setModalVisible(!modalVisible)}>
                                 <View style={{height:40,flexDirection:'row',justifyContent:'flex-end',margin: 10}}>
-                                    <Button
-                                        color="#272C2E"
-                                        title="确认"
-                                        onPress={()=>{this.showPopupView()}}
-                                    />
-                                    <Button
-                                        color="#00BEAF"
-                                        title="返回"
-                                        onPress={() => this.setModalVisible(!modalVisible)}
-                                    />
+                                        <View style={{
+                                            height:38,
+                                            width:width*0.8,
+                                            backgroundColor:'#00BEAF',
+                                            marginTop:8,
+                                            marginBottom:20,
+                                            justifyContent:'center',
+                                            alignItems:'center',
+                                            borderRadius:4,
+                                            marginTop:30
+                                        }}>
+                                            <Text style={{color:'white',textAlign:'center',justifyContent:'center'}}>{"确定"}</Text>
+                                        </View>
                                 </View>
+                                </TouchableOpacity>
                             </View>
                         </View>
                 </Modal>

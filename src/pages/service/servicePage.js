@@ -22,9 +22,9 @@ class ServiceMainPage extends React.Component{
         }
     }
 
-    onCardClick = (data) =>{
+    onCardClick = (data,id) =>{
         if(data){
-            this.props.navigation.navigate('ServiceConfirmPage', { name: data })
+            this.props.navigation.navigate('ServiceConfirmPage', { name: data , id:id })
         }
     }
     onChangeNumber= (value)=>{
@@ -116,7 +116,7 @@ class ServiceMainPage extends React.Component{
                         <View style={{flex:1,flexDirection:'row',marginLeft:15,marginTop:15}}>
                             {
                                 mainServerData.map((item,i)=>{
-                                    return <BottomMainCard text={item.title} key={item.title} onCardClick={this.onCardClick} image={item.image}></BottomMainCard>
+                                    return <BottomMainCard text={item.title} key={item.title} id={item.id} onCardClick={this.onCardClick} image={item.image}></BottomMainCard>
                                 })
                             }
                         </View>
@@ -132,7 +132,7 @@ class ServiceMainPage extends React.Component{
                                     hotServerData.map((item,i)=>{
                                         return(
                                             <View key={item.title} style={{paddingRight:10}}>
-                                                <BottomHotCard text={item.title} key={item.title} subtitle={item.subtitle} onCardClick={this.onCardClick} image={item.image}></BottomHotCard>
+                                                <BottomHotCard text={item.title} key={item.title} id={item.id} subtitle={item.subtitle} onCardClick={this.onCardClick} image={item.image}></BottomHotCard>
                                             </View>
                                         )
                                     })
@@ -213,7 +213,7 @@ function MidCard(props)
 function BottomMainCard(props)
 {
     return(
-        <TouchableOpacity activeOpacity={0.5} style={{flex:1}} onPress={()=>{props.onCardClick(props.text)}}>
+        <TouchableOpacity activeOpacity={0.5} style={{flex:1}} onPress={()=>{props.onCardClick(props.text,props.id)}}>
             <View style={{width:100,height:80,flexDirection:'column'}}>
                 <Image source={props.image}
                        style={{
@@ -230,7 +230,7 @@ function BottomMainCard(props)
 function BottomHotCard(props)
 {
     return(
-        <TouchableOpacity activeOpacity={0.5} style={{flex:1}} onPress={()=>{props.onCardClick(props.text)}}>
+        <TouchableOpacity activeOpacity={0.5} style={{flex:1}} onPress={()=>{props.onCardClick(props.text,props.id)}}>
             <View style={{width:120,height:130,flexDirection:'column'}}>
                 <Image source={props.image}
                        style={{
