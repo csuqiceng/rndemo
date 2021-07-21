@@ -1,6 +1,3 @@
-/**
- * Created by zhaopengsong on 2017/1/3.
- */
 import {
     AppRegistry,
     StyleSheet,

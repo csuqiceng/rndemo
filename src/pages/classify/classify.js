@@ -2,7 +2,9 @@
 
 import * as React from 'react';
 import { Text, View,Image,TouchableOpacity,TextInput } from 'react-native';
-import {SegmentedControl } from '@ant-design/react-native';
+import SegmentedControl  from '@ant-design/react-native/lib/segmented-control';
+import ClassifyMall from "./mall/mall";
+import ClassifyService from "./service/service";
 export default class Classify extends React.Component {
     constructor() {
         super();
@@ -23,6 +25,17 @@ export default class Classify extends React.Component {
     onSearchBarclear = () => {
         this.setState({ searchValue: '' })
     }
+    renderPage=()=>{
+        if (this.state.selected == 0){
+            return(
+               <ClassifyService/>
+            );
+        }else {
+            return(
+                <ClassifyMall/>
+            )
+        }
+    }
     render() {
         return (
             <View style={{flex:1}}>
@@ -37,6 +50,7 @@ export default class Classify extends React.Component {
                     />
                     <View style={{flex:1}}></View>
                 </View>
+
                 <View style={{ height: 40, backgroundColor: "#CFD2D8", borderRadius: 0, paddingLeft: 25, flexDirection: 'row', alignItems: 'center',margin:5 }} >
                     <Image source={require('../../assets/images/home_icon_search.png')} style={{ width: 15, height: 15 }}></Image>
                     <TextInput underlineColorAndroid="transparent" placeholder="请输入关键词" style={{ marginLeft: 10, width: 150}}
@@ -49,6 +63,10 @@ export default class Classify extends React.Component {
                         <Text style={{ color: '#0391ff', fontSize: 14,textAlign:'right' ,marginRight:20 }}>搜索</Text>
                     </TouchableOpacity>
                 </View>
+
+                {
+                    this.renderPage()
+                }
             </View>
         )
     }
