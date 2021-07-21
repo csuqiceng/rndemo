@@ -8,34 +8,9 @@ import {
   createStackNavigator,
   TransitionPresets,
 } from '@react-navigation/stack';
-import MainPage from './src/pages/mainPage';
+import MainPage from './src/pages';
 const Stack = createStackNavigator();
 
-
-
-function HomeScreen1({ navigation }) {
-    return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Home Screen1</Text>
-        </View>
-    );
-}
-
-function HomeScreen2({ navigation }) {
-    return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Home Screen2</Text>
-        </View>
-    );
-}
-
-function HomeScreen3({ navigation }) {
-    return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Home Screen3</Text>
-        </View>
-    );
-}
 window.isLogin = false;
 
 function App() {
