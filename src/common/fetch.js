@@ -4,7 +4,6 @@ async function fetchData(url, param,token, callback){
     await fetch(url,param)
         .then((response) => response.json())
         .then((responseData) => {
-            console.log(JSON.stringify(responseData))
             if (responseData.errno ==0){
                 if (typeof callback =='function'){
                     callback(responseData)

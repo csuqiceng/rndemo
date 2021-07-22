@@ -66,7 +66,7 @@ class ServiceMainPage extends React.Component{
                     <Text
                         style={{
                             textAlign:'center',
-                            fontSize: 18,fontWeight:'700',
+                            fontSize: 18,fontWeight:'bold',
                             backgroundColor:'white',
                             includeFontPadding: false,
                             textAlignVertical: 'center',

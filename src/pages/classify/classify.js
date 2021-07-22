@@ -26,13 +26,13 @@ export default class Classify extends React.Component {
         this.setState({ searchValue: '' })
     }
     renderPage=()=>{
-        if (this.state.selected == 0){
+        if (this.state.selected == 1){
             return(
-               <ClassifyService/>
+               <ClassifyMall/>
             );
         }else {
             return(
-                <ClassifyMall/>
+                <ClassifyService/>
             )
         }
     }
@@ -43,9 +43,9 @@ export default class Classify extends React.Component {
                     <View style={{flex:1}}></View>
                     <SegmentedControl
                         values={['服务', '商城']}
-                        style={{width:200,backgroundColor:'white',borderColor:'gray',height:30,borderRadius:20}}
+                        style={{width:200,backgroundColor:'white',borderColor:'gray',height:40,borderRadius:20}}
                         tintColor={'#00BEAF'}
-                        selectedIndex={this.state.selected}
+                        selectedIndex={this.state.selectId}
                         onChange={this.onChange}
                     />
                     <View style={{flex:1}}></View>
@@ -54,8 +54,8 @@ export default class Classify extends React.Component {
                 <View style={{ height: 40, backgroundColor: "#CFD2D8", borderRadius: 0, paddingLeft: 25, flexDirection: 'row', alignItems: 'center',margin:5 }} >
                     <Image source={require('../../assets/images/home_icon_search.png')} style={{ width: 15, height: 15 }}></Image>
                     <TextInput underlineColorAndroid="transparent" placeholder="请输入关键词" style={{ marginLeft: 10, width: 150}}
-                               onChangeText={this.onChangeText}
-                               value={this.state.inputValue}
+                               // onChangeText={this.onChangeText}
+                               // value={this.state.inputValue}
                                ref="keyWordInput"
                                onSubmitEditing={() => { this.refs.keyWordInput.blur() }}>
                     </TextInput>

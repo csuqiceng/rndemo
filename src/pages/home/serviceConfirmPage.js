@@ -144,7 +144,7 @@ export default class ServiceConfirmPage extends React.Component
                                     <Text style={{width:100,height:20,borderColor:'#A38705',color: '#A38705',borderRadius:2,borderWidth:1,textAlign: 'center',marginLeft: 10}}>购买得积分</Text>
                                     <View style={{flex:1}}></View>
                                     <TouchableOpacity onPress={() => { dismissKeyboard() }} style={{flexDirection:'row' ,marginRight:10}}>
-                                        <Text style={{ color: '#333333', fontSize: 15,fontWeight:'300',marginRight:10}}>领券</Text>
+                                        <Text style={{ color: '#333333', fontSize: 15,fontWeight:'bold',marginRight:10}}>领券</Text>
                                         <Image style={{ width: 10, height: 20 }} source={require('../../assets/images/goto.png')} />
                                     </TouchableOpacity>
                                 </View>
@@ -161,7 +161,7 @@ export default class ServiceConfirmPage extends React.Component
                                 <Text
                                     style={{
                                         fontSize: 13,
-                                        fontWeight:'700',
+                                        fontWeight:'bold',
                                         includeFontPadding: false,
                                         textAlignVertical: 'center',
                                         paddingLeft:15,
@@ -173,7 +173,7 @@ export default class ServiceConfirmPage extends React.Component
                                 <Text
                                     style={{
                                         fontSize: 13,
-                                        fontWeight:'700',
+                                        fontWeight:'bold',
                                         includeFontPadding: false,
                                         textAlignVertical: 'center',
                                         marginRight: 10,
@@ -183,7 +183,7 @@ export default class ServiceConfirmPage extends React.Component
                                 </TouchableOpacity>
                             </View>
                             <View style={{backgroundColor:'white',marginTop: 10,backgroundColor:'gray'}}>
-                                <Text style={{textAlign: 'center',fontWeight:'300',fontSize:15,marginTop: 20 ,color: '#666666'}}>{'---商品详情---'}</Text>
+                                <Text style={{textAlign: 'center',fontWeight:'bold',fontSize:15,marginTop: 20 ,color: '#666666'}}>{'---商品详情---'}</Text>
                                 <View style={{height:500}}>
                                 {/* todo*/}
                                 </View>
@@ -238,13 +238,13 @@ export default class ServiceConfirmPage extends React.Component
                                 </View>
 
                                 <View>
-                                    <Text style={{fontSize:20,fontWeight:"800"}}>服务项目</Text>
+                                    <Text style={{fontSize:20,fontWeight:"bold"}}>服务项目</Text>
                                     <View style={{flexDirection:'row',marginTop: 10}}>
                                         <Text style={{width:100,height:30,borderColor:this.state.choose?'#00BEAF':'gray',color: 'black',borderRadius:2,borderWidth:1,textAlign: 'center',textAlignVertical: 'center'}}>家庭日常保洁</Text>
                                         <Text style={{width:100,height:30,borderColor:'gray',color: 'black',borderRadius:2,borderWidth:1,textAlign: 'center',marginLeft: 10,textAlignVertical: 'center',}}>新居开荒</Text>
                                     </View>
                                     <View style={{flexDirection:'row',height:50,marginTop: 20}}>
-                                        <Text style={{fontSize:20,fontWeight:"800",flex:2,marginTop: 10}}>购买数量</Text>
+                                        <Text style={{fontSize:20,fontWeight:"bold",flex:2,marginTop: 10}}>购买数量</Text>
                                         <Stepper
                                             key="1"
                                             max={10}
