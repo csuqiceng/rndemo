@@ -45,7 +45,7 @@ export default class MainPage extends React.Component {
                         tabBarLabel: '首页',
                         tabBarIcon: ({ focused, tintColor }) => (
                             <Image
-                                source={focused ? require('../assets/images/tab_icon_home_sel.png') : require('../assets/images/tab_icon_home_sel.png')}
+                                source={focused ? require('../assets/images/tab_icon_home_sel.png') : require('../assets/images/tab_icon_home_nor.png')}
                                 style={{ width: 26, height: 26, tintColor: tintColor }}
                             />
                         )
@@ -55,7 +55,7 @@ export default class MainPage extends React.Component {
                         tabBarLabel: '分类',
                         tabBarIcon: ({ focused, tintColor }) => (
                             <Image
-                                source={focused ? require('../assets/images/tab_icon_classify_nor.png') : require('../assets/images/tab_icon_classify_nor.png')}
+                                source={focused ? require('../assets/images/tab_icon_classify_sel.png') : require('../assets/images/tab_icon_classify_nor.png')}
                                 style={{ width: 26, height: 26, tintColor: tintColor }}
                             />
                         )
@@ -64,7 +64,7 @@ export default class MainPage extends React.Component {
                         tabBarLabel: '新闻公告',
                         tabBarIcon: ({ focused, tintColor }) => (
                             <Image
-                                source={focused ? require('../assets/images/tab_icon_news_nor.png') : require('../assets/images/tab_icon_news_nor.png')}
+                                source={focused ? require('../assets/images/tab_icon_news_sel.png') : require('../assets/images/tab_icon_news_nor.png')}
                                 style={{ width: 26, height: 26, tintColor: tintColor }}
                             />
                         )
@@ -73,7 +73,7 @@ export default class MainPage extends React.Component {
                         tabBarLabel: '我的',
                         tabBarIcon: ({ focused, tintColor }) => (
                             <Image
-                                source={focused ? require('../assets/images/tab_icon_my_nor.png') : require('../assets/images/tab_icon_my_nor.png')}
+                                source={focused ? require('../assets/images/tab_icon_my_sel.png') : require('../assets/images/tab_icon_my_nor.png')}
                                 style={{ width: 26, height: 26, tintColor: tintColor }}
                             />
                         )
