@@ -11,7 +11,7 @@ import ListView from 'deprecated-react-native-listview';
 
 import {createStackNavigator} from "@react-navigation/stack";
 import NavBar from "../../common/navBar";
-import fetchData from "../../common/fetch";
+import {fetchData} from "../../common/fetch";
 var youLikeData = require('../../LocalData/mall.json');
 const {width} = Dimensions.get('window');
 

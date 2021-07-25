@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import React,{useState,useEffect} from 'react';
 import ListView from 'deprecated-react-native-listview';
-import fetchData from "../../../common/fetch";
 const {width} = Dimensions.get('window');
 class ClassifyMall extends React.Component {
      constructor(props) {

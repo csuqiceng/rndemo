@@ -1,7 +1,7 @@
 
 import * as React from 'react';
 import { Text, View, Image, TouchableOpacity, TextInput, ScrollView, ImageBackground, StyleSheet } from 'react-native';
-import fetchData from '../../../common/fetch'
+import {fetchData} from '../../../common/fetch'
 import yiji from '../../../LocalData/yiji.json'
 import erji from '../../../LocalData/erji.json'
 import shangping from '../../../LocalData/shangping.json'
@@ -76,7 +76,7 @@ class RightSecondLvView extends React.Component {
             },
             method: 'GET',
         }
-        let url = `http://lhh.natapp1.cc/api//wx/catalog/getsecondcategory?id=${this.props.firstLvData}`;
+        let url = `http://lhh.natapp1.cc/api/wx/catalog/getsecondcategory?id=${this.props.firstLvData}`;
         console.log(url)
         const  callback =(responseData)=>{
             this.setState({
@@ -93,7 +93,7 @@ class RightSecondLvView extends React.Component {
             },
             method: 'GET',
         }
-        let url = `http://lhh.natapp1.cc/api//wx/catalog/getsecondcategory?id=${nextProps.firstLvData}`;
+        let url = `http://lhh.natapp1.cc/api/wx/catalog/getsecondcategory?id=${nextProps.firstLvData}`;
         const  callback =(responseData)=>{
             this.setState({
                 secondLvData:responseData.data

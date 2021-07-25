@@ -20,7 +20,7 @@ import {
 import Swiper from 'react-native-swiper';
 import NavBar from "../../common/navBar";
 import Stepper from '@ant-design/react-native/lib/stepper';
-import fetchData from '../../common/fetch'
+import {fetchData} from '../../common/fetch'
 var {width,height} = Dimensions.get('window');
 
 const swiperData =[

@@ -10,7 +10,41 @@ import {
 import MyCell from './commonMineCell'
 import MineHeaderView from './mineHeaderView'
 import MineMiddleView from './mineMiddleView'
-export default function MinePage(){
+import LoginView from "../login/loginView";
+import RegisterView from "../login/registerView";
+import {
+    createStackNavigator,
+    TransitionPresets,
+} from '@react-navigation/stack';
+const MyinfoStack = createStackNavigator();
+
+export default class MinePage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+
+        }
+    }
+    render() {
+            return (
+            <MyinfoStack.Navigator
+                initialRouteName="SignIn"
+                headerMode="screen"
+                screenOptions={{
+                    headerShown: false
+                }}>
+                <MyinfoStack.Screen name="login" options={{
+                }} component={LoginView} />
+                <MyinfoStack.Screen name="register" options={{}} component={RegisterView} />
+                <MyinfoStack.Screen name="mainPgae" options={{}} component={MinePage1} />
+            </MyinfoStack.Navigator>
+            );
+    }
+}
+
+
+
+ function MinePage1(){
         return (
             <View style={styles.container}>
                 <ScrollView
