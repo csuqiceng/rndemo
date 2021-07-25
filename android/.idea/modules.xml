@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mengqi.iml" filepath="$PROJECT_DIR$/.idea/modules/mengqi.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/mengqi.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/mengqi.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1815070804/mengqi.react-native-async-storage_async-storage.iml" filepath="$PROJECT_DIR$/.idea/modules/1815070804/mengqi.react-native-async-storage_async-storage.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-727295399/mengqi.react-native-community_cameraroll.iml" filepath="$PROJECT_DIR$/.idea/modules/-727295399/mengqi.react-native-community_cameraroll.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/1432537616/mengqi.react-native-community_masked-view.iml" filepath="$PROJECT_DIR$/.idea/modules/1432537616/mengqi.react-native-community_masked-view.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/484900504/mengqi.react-native-community_slider.iml" filepath="$PROJECT_DIR$/.idea/modules/484900504/mengqi.react-native-community_slider.iml" />
