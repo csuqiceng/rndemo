@@ -28,7 +28,7 @@ export default class MinePage extends React.Component {
     render() {
             return (
             <MyinfoStack.Navigator
-                initialRouteName="SignIn"
+                initialRouteName="login"
                 headerMode="screen"
                 screenOptions={{
                     headerShown: false
@@ -47,10 +47,7 @@ export default class MinePage extends React.Component {
  function MinePage1(){
         return (
             <View style={styles.container}>
-                <ScrollView
-                    contentInset= {{top:-200}}
-                    contentOffset ={{y:200}}
-                >
+                <ScrollView showsVerticalScrollIndicator={false}>
                     <MineHeaderView/>
                     <View>
                         <MyCell

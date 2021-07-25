@@ -27,13 +27,15 @@ export  default  function HeaderView() {
 function renderTopView() {
     return(
         <View style={styles.topViewStyle}>
-            <Image source={require('../../assets/favicon.png')} style={styles.leftIconStyle}/>
+            <Image source={require('../../assets/images/myinfo/my_icon_head.png')} style={styles.leftIconStyle}/>
             <View style={styles.centerViewStyle}>
                 <Text style={{fontSize:18, color:'white', fontWeight:'bold'}}>Admin</Text>
-                <Image source={require('../../assets/favicon.png')} style={{width:17, height:17}}/>
+                {/*<Image source={require('../../assets/favicon.png')} style={{width:17, height:17}}/>*/}
             </View>
             {/*--右边的箭头--*/}
-            <Image source={require('../../assets/favicon.png')} style={{width:8, height:13, marginRight:8}}/>
+            <TouchableOpacity activeOpacity={0.5}  onPress={() =>{alert("系统设置")}}>
+                <Image  source={require('../../assets/images/myinfo/my_icon_set.png')} style={{width:30, height:30, marginRight:20}}/>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -48,7 +50,7 @@ function renderBottomItem() {
     // 数组
     var itemArr = [];
     // 数据数组
-    var data = [{'number':'100', 'title':'优惠券'},{'number':'12', 'title':'评价'},{'number':'50', 'title':'收藏'}];
+    var data = [{'number':'200.00', 'title':'我的余额'},{'number':'321', 'title':'积分'},{'number':'12', 'title':'优惠券'}];
     // 遍历创建组件装入数组
     for(var i=0; i<data.length; i++){
         // 取出单独的数据
@@ -57,8 +59,8 @@ function renderBottomItem() {
         itemArr.push(
             <TouchableOpacity key={i}>
                 <View style={styles.bottomInnerViewStyle}>
-                    <Text style={{color:'white'}}>{item.number}</Text>
-                    <Text style={{color:'white'}}>{item.title}</Text>
+                    <Text style={{color:'white',fontSize:20}}>{item.number}</Text>
+                    <Text style={{color:'white',fontSize:15}}>{item.title}</Text>
                 </View>
             </TouchableOpacity>
         );
@@ -70,8 +72,8 @@ function renderBottomItem() {
 
 const styles = StyleSheet.create({
     container: {
-        height:400,
-        backgroundColor:'rgba(255,96,0,1.0)'
+        height:200,
+        backgroundColor:'#31C297'
     },
 
     centerViewStyle:{
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
 
     topViewStyle:{
         flexDirection:'row',
-        marginTop:280,
+        marginTop:50,
         // 设置侧轴的对齐方式
         alignItems:'center',
         // 设置主轴的对齐方式
@@ -93,6 +95,7 @@ const styles = StyleSheet.create({
         height:70,
         borderRadius:35,
         borderWidth:3,
+        marginLeft:20,
         borderColor:'rgba(0,0,0,0.2)'
     },
 
@@ -100,18 +103,18 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         // 绝对定位
         position:'absolute',
-        bottom:0
+        bottom:20
     },
 
     bottomInnerViewStyle:{
         width:(width/3)+1,
         height:40,
-        backgroundColor:'rgba(255,255,255,0.4)',
+        // backgroundColor:'rgba(255,255,255,0.4)',
 
         justifyContent:'center',
         alignItems:'center',
 
-        borderRightWidth:1,
-        borderRightColor:'white'
+        // borderRightWidth:1,
+        // borderRightColor:'white'
     }
 });

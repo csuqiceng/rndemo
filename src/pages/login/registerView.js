@@ -18,17 +18,46 @@ export default class RegisterView extends React.Component {
     constructor() {
         super();
         this.state = {
-            imageHeight: 200,
+            imageHeight: 150,
             passWord: '',
             loginName: '',
             mobile: '',
             code: '',
             verificationtext: '获取验证码',
             verificationBool: false,
-            token:'otfdtvohut0r30unlxl8fwqwrt1na9iz'
+            token:'otfdtvohut0r30unlxl8fwqwrt1na9iz',
+            secureTextType:true
         }
     }
-
+    //用户名
+    onLoginNameChanged=(loginName)=>{
+        this.setState({
+            loginName:loginName
+        })
+    }
+    //密码
+    onPasswordChanged=(passWord)=>{
+        this.setState({
+            passWord:passWord
+        })
+    }
+    //手机号
+    onMobileChanged=(mobile)=>{
+        this.setState({
+            mobile:mobile
+        })
+    }
+    //验证码
+    onMobileChanged=(mobile)=>{
+        this.setState({
+            mobile:mobile
+        })
+    }
+    onCodeChanged=(code)=>{
+        this.setState({
+            code:code
+        })
+    }
     onChooseItems = (e) => {
         this.setState({
             selectItem: e
@@ -41,14 +70,32 @@ export default class RegisterView extends React.Component {
     }
     onBlurCallback = () => {
         this.setState({
-            imageHeight: 200
+            imageHeight: 150
         })
     }
     onRegisterCallback = () => {
-        this.props.navigation.navigate('register')
-    }
-    onLoginCallback = () => {
-        this.props.navigation.navigate('mainPgae')
+        let url = 'http://lhh.natapp1.cc/api/wx/auth/register';
+        const  callback =(e)=>{
+            // navigation.goBack()
+        }
+        let data = {
+            "username": this.state.loginName,
+            "password": this.state.passWord,
+            "mobile": this.state.mobile,
+            "code": this.state.code,
+            "wxCode": '',
+        }
+        let param = {
+            body: JSON.stringify(data), // must match 'Content-Type' header
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            headers: {
+                'X-Litemall-Token': this.state.token,
+                'content-type': 'application/json'
+            },
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        }
+        fetchData(url,param,callback)
+        // this.props.navigation.navigate('login')
     }
 
     //发送验证码
@@ -95,6 +142,11 @@ export default class RegisterView extends React.Component {
 
     }
 
+    onChangeSecureTextType=()=>{
+        this.setState({
+            secureTextType:false
+        })
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -102,8 +154,10 @@ export default class RegisterView extends React.Component {
                     height: this.state.imageHeight,
                     width: width
                 }} />
-                <Text style={{fontSize: 20,marginTop:30,marginBottom:30}}>欢迎来到梦奇佳园</Text>
+                <Text style={{fontSize: 20,marginTop:30,marginBottom:30}}>嗨~欢迎来到梦奇佳园~</Text>
                 <ScrollView showsVerticalScrollIndicator={false}>
+
+                    {/*登录名*/}
                     <View style={{
                         flex: 1
                     }}>
@@ -123,11 +177,14 @@ export default class RegisterView extends React.Component {
                                 onFocus={this.props.onfocusCallback}//获取焦点
                                 onBlur={this.props.onBlurCallback}//失去焦点
                                 placeholder={' 请输入登录名称'}
+                                value={this.state.loginName}
                                 onChangeText={this.onLoginNameChanged}  //添加值改变事件
                                 style={{ ...styles.tgTextInputStyle }}
                             />
                         </View>
                     </View>
+
+                    {/*密码*/}
                     <View style={{
                         flex: 1
                     }}>
@@ -143,18 +200,24 @@ export default class RegisterView extends React.Component {
                         }}>
                             <Image source={require('../../assets/images/myinfo/login_icon_password.png')} style={{ width: 22, height: 22, marginLeft: 5 }}></Image>
                             <TextInput
-                                underlineColorAndroid='transparent'
+                                autoCapitalize='none'  //设置首字母不自动大写
                                 onFocus={this.props.onfocusCallback}//获取焦点
                                 onBlur={this.props.onBlurCallback}//失去焦点
                                 placeholder={' 请设置密码'}
-                                onChangeText={this.onLoginNameChanged}  //添加值改变事件
+                                underlineColorAndroid={'transparent'}  //将下划线颜色改为透明
+                                secureTextEntry={true}  //设置为密码输入框
+                                placeholderTextColor={'#ccc'}  //设置占位符颜色
+                                onChangeText={this.onPasswordChanged}  //添加值改变事件
                                 style={{...styles.tgTextInputStyle,width:width*0.8-60}}
+                                value={this.state.passWord}
                             />
-                            <TouchableOpacity activeOpacity={0.5}  onPress={() =>{this.sendCode()}}>
+                            <TouchableOpacity activeOpacity={0.5}  onPress={() =>{this.onChangeSecureTextType}}>
                                 <Image source={require('../../assets/images/myinfo/login_icon_eyes.png')} style={{ width: 22, height: 22}}></Image>
                             </TouchableOpacity>
                         </View>
                     </View>
+
+                    {/*手机号码*/}
                     <View style={{
                         flex: 1
                     }}>
@@ -174,11 +237,15 @@ export default class RegisterView extends React.Component {
                                 onFocus={this.props.onfocusCallback}//获取焦点
                                 onBlur={this.props.onBlurCallback}//失去焦点
                                 placeholder={' 请输入手机号码'}
-                                onChangeText={this.onLoginNameChanged}  //添加值改变事件
+                                value={this.state.mobile}
+                                onChangeText={this.onMobileChanged}  //添加值改变事件
                                 style={{ ...styles.tgTextInputStyle }}
                             />
                         </View>
                     </View>
+
+
+                    {/*验证码*/}
                     <View style={{
                         flex: 1
                     }}>
@@ -198,7 +265,8 @@ export default class RegisterView extends React.Component {
                                 onFocus={this.props.onfocusCallback}//获取焦点
                                 onBlur={this.props.onBlurCallback}//失去焦点
                                 placeholder={' 请输入验证码'}
-                                onChangeText={this.onLoginNameChanged}  //添加值改变事件
+                                value={this.state.code}
+                                onChangeText={this.onCodeChanged}  //添加值改变事件
                                 style={{...styles.tgTextInputStyle,width:width*0.8-110}}
                             />
                             <TouchableOpacity activeOpacity={0.5}  onPress={() =>{this.sendCode()}}>
@@ -211,6 +279,12 @@ export default class RegisterView extends React.Component {
                                 <Text style={{color:'white',textAlign:'center',justifyContent:'center'}}>{"注册"}</Text>
                             </View>
                         </TouchableOpacity>
+                        <View style={{flexDirection:'row',justifyContent:'flex-end',flex: 1}}>
+                            <Text style={{fontSize: 15}}>已有账号,</Text>
+                            <TouchableOpacity activeOpacity={0.5}  onPress={() => {this.props.navigation.navigate('login')}}>
+                                <Text style={{fontSize: 15,color:'#13B4BB'}}> 去登陆</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </ScrollView>
             </View>
@@ -218,156 +292,6 @@ export default class RegisterView extends React.Component {
     }
 }
 
-
-//
-// export default function RegisterView1({ navigation }) {
-//     const passwordRef = useRef(null);
-//
-//     let [passWord,setPassWord] = useState("");
-//     let [loginName,setLoginName] = useState("");
-//     let [mobile,setMobile] = useState("");
-//     let [code,setCode] = useState("");
-//     let [codeBtn,setCodeBtn] = useState({
-//         btnText: '发送验证码',
-//         btnBool: false,
-//     });
-//     let [token,setToken] = useState("qapbcjv06x804psb3z7h4tnepcu348t4");
-//
-//     //密码
-//     const onPasswordChanged = (newPassword) => {
-//         setPassWord(newPassword);
-//     };
-//
-//     //登录名
-//     const onLoginNameChanged = (newLoginName) => {
-//         setLoginName(newLoginName)
-//     };
-//     //手机
-//     const onPhoneChanged = (mobile) => {
-//         setMobile(mobile)
-//     };
-//     //手机验证码
-//     const onCodeChanged = (code) => {
-//         setCode(code)
-//     };
-//     //注册
-//     const register =()=>{
-//         //返回登录
-//         let data = {
-//             "username": loginName,
-//             "password": passWord,
-//             "mobile": mobile,
-//             "code": code,
-//             "wxCode": "123456",
-//         }
-//         let url = 'http://lhh.natapp1.cc/api/wx/auth/register';
-//         const  callback =(responseData)=>{
-//             setToken(responseData.data.token)
-//             navigation.goBack()
-//         }
-//         let param = {
-//             body: JSON.stringify(data), // must match 'Content-Type' header
-//             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-//             headers: {
-//                 'X-Dts-Token': token,
-//                 'content-type': 'application/json'
-//             },
-//             method: 'POST', // *GET, POST, PUT, DELETE, etc.
-//         }
-//         fetchData(url,param,token,callback)
-//     }
-//
-//     //发送验证码
-//     const sendCode =()=>{
-//         let data = {
-//             "mobile": mobile,
-//         }
-//        if (mobile.length > 0){
-//            setInterval(() => {
-//                if (maxTime > 0) {
-//                    --maxTime
-//                    setCodeBtn({
-//                        btnText: '重新获取' + maxTime,
-//                        btnBool: true
-//                    })
-//                }
-//                else {
-//                    setCodeBtn({
-//                        btnText: '发送验证码',
-//                        btnBool: false
-//                    })
-//                }
-//            }, 1000)
-//        } else {
-//            alert("输入正确手机号码")
-//            return
-//        }
-//         if (!codeBtn.btnBool){
-//             let url = 'http://lhh.natapp1.cc/api/wx/auth/regCaptcha';
-//             const  callback =(e)=>{
-//                 // navigation.goBack()
-//             }
-//             let param = {
-//                 body: JSON.stringify(data), // must match 'Content-Type' header
-//                 cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-//                 headers: {
-//                     'X-Dts-Token': token,
-//                     'content-type': 'application/json'
-//                 },
-//                 method: 'POST', // *GET, POST, PUT, DELETE, etc.
-//             }
-//             fetchData(url,param,token,callback)
-//         }
-//
-//     }
-//     return (
-//         <View style={styles.container}>
-//             <Image source={require('../../assets/favicon.png')} style={styles.tgIconStyle} />
-//             <TextInput
-//                 placeholder={'  用户名'}
-//                 onChangeText={onLoginNameChanged}  //添加值改变事件
-//                 style={{ ...styles.tgTextInputStyle, marginTop: 20 }}
-//             />
-//
-//
-//             <TextInput
-//                 ref={passwordRef}  //设置描述
-//                 onChangeText={onPasswordChanged}  //添加值改变事件
-//                 style={styles.tgTextInputStyle}
-//                 autoCapitalize='none'  //设置首字母不自动大写
-//                 underlineColorAndroid={'transparent'}  //将下划线颜色改为透明
-//                 secureTextEntry={true}  //设置为密码输入框
-//                 placeholderTextColor={'#ccc'}  //设置占位符颜色
-//                 placeholder={'密码'}  //设置占位符
-//             />
-//             <View style={{flexDirection:'row',width: width * 0.8}}>
-//                 <TextInput
-//                     placeholder={'  手机'}
-//                     onChangeText={onPhoneChanged}  //添加值改变事件
-//                     style={{ ...styles.phoneInputStyle}}
-//                 />
-//                 <TextInput
-//                     placeholder={'验证码'}
-//                     onChangeText={onCodeChanged}  //添加值改变事件
-//                     style={{...styles.codeInputStyle}}
-//                 />
-//                 <TouchableOpacity activeOpacity={0.5}  onPress={() => sendCode()}>
-//                     <View style={{...styles.codeBtnStyle,backgroundColor:codeBtn.btnBool?'gray':'#00BB00'}}>
-//                         <Text style={{color:'white',textAlign:'center',justifyContent:'center'}}>{codeBtn.btnText}</Text>
-//                     </View>
-//                 </TouchableOpacity>
-//             </View>
-//             <TouchableOpacity activeOpacity={0.5}  onPress={() => register()}>
-//                 <View style={styles.tgLoginBtnStyle}>
-//                     <Text style={{color:'white',textAlign:'center',justifyContent:'center'}}>{"注册"}</Text>
-//                 </View>
-//             </TouchableOpacity>
-//             <View style={styles.tgSettingStyle}>
-//                 <Text style={{fontSize:15}} onPress={() => navigation.goBack()}>返回</Text>
-//             </View>
-//         </View>
-//     );
-// }
 const styles = StyleSheet.create({
     container: {
         flex: 1,

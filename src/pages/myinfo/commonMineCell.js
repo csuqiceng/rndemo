@@ -16,7 +16,7 @@ function rightSubView(props) {
         <View style={{flexDirection:'row', alignItems:'center'}}>
             {renderRightContent(props)}
             {/*箭头*/}
-            <Image source={require('../../assets/favicon.png')} style={{width:8, height:13, marginRight:8, marginLeft:5}}/>
+            <Image source={require('../../assets/images/myinfo/icon_back.png')} style={{width:8, height:13, marginRight:8, marginLeft:5}}/>
         </View>
     )
 }

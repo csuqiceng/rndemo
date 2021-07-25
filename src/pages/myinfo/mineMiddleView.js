@@ -13,10 +13,10 @@ import {
 export  default function MineMiddleView() {
     return (
         <View style={styles.container}>
-            {renderInnerView('order1','代付款')}
-            {renderInnerView('order2','待使用')}
-            {renderInnerView('order3','待评价')}
-            {renderInnerView('order4','退款/售后')}
+            {renderInnerView('order1','待付款')}
+            {renderInnerView('order2','待发货')}
+            {renderInnerView('order3','待收货')}
+            {renderInnerView('order4','已完成')}
         </View>
     );
 }

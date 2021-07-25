@@ -19,7 +19,7 @@ export default class LoginView extends React.Component{
     constructor() {
         super();
         this.state={
-            imageHeight:200,
+            imageHeight:150,
             selectItem:'accountlogin',
             passWord:'',
             loginName:'',
@@ -39,7 +39,7 @@ export default class LoginView extends React.Component{
     }
     onBlurCallback=()=> {
         this.setState({
-            imageHeight:200
+            imageHeight:150
         })
     }
     onRegisterCallback=()=>{
@@ -157,6 +157,7 @@ class AccoutLoginView extends React.Component{
               }}>
                   <Image source={require('../../assets/images/myinfo/login_icon_name.png')} style={{ width: 22, height: 22,marginLeft:5 }}></Image>
                   <TextInput
+                      value={this.state.loginName}
                       underlineColorAndroid='transparent'
                       onFocus={this.props.onfocusCallback}//获取焦点
                       onBlur={this.props.onBlurCallback}//失去焦点
@@ -185,6 +186,7 @@ class AccoutLoginView extends React.Component{
                       secureTextEntry={true}  //设置为密码输入框
                       placeholderTextColor={'#ccc'}  //设置占位符颜色
                       placeholder={'请输入登录密码'}  //设置占位符
+                      value={this.state.passWord}
                   />
               </View>
 
