@@ -6,6 +6,7 @@ import {Text, View,TextInput, StyleSheet, Image ,Dimensions,TouchableOpacity,Saf
 import ServiceConfirmPage from "./serviceConfirmPage";
 import ServiceOrderPage from "./serviceOrderPage";
 import {mainServerData,hotServerData,preferentialData} from '../../LocalData/homePageData'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const {width} = Dimensions.get('window');
 
@@ -53,10 +54,16 @@ class ServiceMainPage extends React.Component{
 
     }
 
-    componentDidMount() {
-
+    async componentDidMount() {
+        try{
+            let loginType = await  AsyncStorage.getItem('loginType');
+            let token = await  AsyncStorage.getItem('token');
+            window.loginType =  loginType;
+            window.token =  token;
+        } catch (e) {
+            console.log('出错')
+        }
     }
-
     render() {
         return(
             <View style={styles.container}>

@@ -85,22 +85,22 @@ class RightSecondLvView extends React.Component {
         }
         fetchData(url,param,'otfdtvohut0r30unlxl8fwqwrt1na9iz',callback);
     }
-    componentWillReceiveProps(nextProps, nextContext) {
-        let param = {
-            headers: {
-                'X-Litemall-Token': 'otfdtvohut0r30unlxl8fwqwrt1na9iz',
-                'content-type': 'application/json'
-            },
-            method: 'GET',
-        }
-        let url = `http://lhh.natapp1.cc/api/wx/catalog/getsecondcategory?id=${nextProps.firstLvData}`;
-        const  callback =(responseData)=>{
-            this.setState({
-                secondLvData:responseData.data
-            })
-        }
-        fetchData(url,param,'otfdtvohut0r30unlxl8fwqwrt1na9iz',callback);
-    }
+    // componentWillReceiveProps(nextProps, nextContext) {
+    //     let param = {
+    //         headers: {
+    //             'X-Litemall-Token': 'otfdtvohut0r30unlxl8fwqwrt1na9iz',
+    //             'content-type': 'application/json'
+    //         },
+    //         method: 'GET',
+    //     }
+    //     let url = `http://lhh.natapp1.cc/api/wx/catalog/getsecondcategory?id=${nextProps.firstLvData}`;
+    //     const  callback =(responseData)=>{
+    //         this.setState({
+    //             secondLvData:responseData.data
+    //         })
+    //     }
+    //     fetchData(url,param,'otfdtvohut0r30unlxl8fwqwrt1na9iz',callback);
+    // }
 
     render() {
         const { secondLvData } = this.state;

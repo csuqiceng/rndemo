@@ -14,17 +14,17 @@ import {
 
 var {width} = Dimensions.get('window');
 
-export  default  function HeaderView() {
+export  default function HeaderView(props) {
     return (
         <View style={styles.container}>
             {/*上部分*/}
-            {renderTopView()}
+            {renderTopView(props)}
             {/*下部分*/}
             {renderBottomView()}
         </View>
     );
 }
-function renderTopView() {
+function renderTopView(props) {
     return(
         <View style={styles.topViewStyle}>
             <Image source={require('../../assets/images/myinfo/my_icon_head.png')} style={styles.leftIconStyle}/>
@@ -33,7 +33,7 @@ function renderTopView() {
                 {/*<Image source={require('../../assets/favicon.png')} style={{width:17, height:17}}/>*/}
             </View>
             {/*--右边的箭头--*/}
-            <TouchableOpacity activeOpacity={0.5}  onPress={() =>{alert("系统设置")}}>
+            <TouchableOpacity activeOpacity={0.5}  onPress={() =>{props.onSystemPageCallback()}}>
                 <Image  source={require('../../assets/images/myinfo/my_icon_set.png')} style={{width:30, height:30, marginRight:20}}/>
             </TouchableOpacity>
         </View>

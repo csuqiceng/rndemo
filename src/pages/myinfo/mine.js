@@ -12,6 +12,10 @@ import MineHeaderView from './mineHeaderView'
 import MineMiddleView from './mineMiddleView'
 import LoginView from "../login/loginView";
 import RegisterView from "../login/registerView";
+import SystemPage from "./system";
+import Changepassword from "./changepassword";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import {
     createStackNavigator,
     TransitionPresets,
@@ -22,33 +26,46 @@ export default class MinePage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            loginType:'login'
         }
     }
+
     render() {
+            let loginType = this.state.loginType;
+            if ( window.loginType){
+                loginType = window.loginType;
+            }
             return (
-            <MyinfoStack.Navigator
-                initialRouteName="login"
-                headerMode="screen"
-                screenOptions={{
-                    headerShown: false
-                }}>
-                <MyinfoStack.Screen name="login" options={{
-                }} component={LoginView} />
-                <MyinfoStack.Screen name="register" options={{}} component={RegisterView} />
-                <MyinfoStack.Screen name="mainPgae" options={{}} component={MinePage1} />
-            </MyinfoStack.Navigator>
+                <MyinfoStack.Navigator
+                    initialRouteName={loginType}
+                    headerMode="screen"
+                    screenOptions={{
+                        headerShown: false
+                    }}>
+                    <MyinfoStack.Screen name="login" options={{
+                    }} component={LoginView} />
+                    <MyinfoStack.Screen name="register" options={{}} component={RegisterView} />
+                    <MyinfoStack.Screen name="mainPgae" options={{}} component={MyinfoPage} />
+                    <MyinfoStack.Screen name="system" options={{}} component={SystemPage} />
+                    <MyinfoStack.Screen name="changepassword" options={{}} component={Changepassword} />
+                </MyinfoStack.Navigator>
             );
-    }
+        }
 }
 
 
-
- function MinePage1(){
+ class MyinfoPage extends React.Component {
+    constructor() {
+        super();
+    }
+     onSystemPageCallback=()=>{
+         this.props.navigation.navigate('system')
+     }
+    render() {
         return (
             <View style={styles.container}>
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    <MineHeaderView/>
+                    <MineHeaderView onSystemPageCallback={this.onSystemPageCallback}/>
                     <View>
                         <MyCell
                             leftIconName="collect"
@@ -96,12 +113,11 @@ export default class MinePage extends React.Component {
                         />
                     </View>
                 </ScrollView>
-
-
             </View>
-
         );
     }
+ }
+
 
 const styles = StyleSheet.create({
     container: {

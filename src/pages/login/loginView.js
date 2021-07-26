@@ -12,7 +12,9 @@ import {
     ScrollView
 } from 'react-native';
 import {fetchData} from "../../common/fetch";
-import Localstorage from '../../common/localStorage'
+// import Localstorage from '../../common/localStorage'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 var {width,height} = Dimensions.get('window');
 let maxTime  = 60;
 export default class LoginView extends React.Component{
@@ -130,17 +132,22 @@ class AccoutLoginView extends React.Component{
         }
         let url = 'http://lhh.natapp1.cc/api/wx/auth/login';
         const  callback =(responseData)=>{
-            // setToken(responseData.data.token)
-            // navigation.navigate('Home', { token: responseData.data.token })
-            // let Localstorage1 = new Localstorage();
-            // Localstorage1.save('token',responseData.data.token)
-            console.log(responseData.data.token)
-            Localstorage.save('token',{'token':responseData.data.token});
-            console.log(JSON.stringify(Localstorage.get('token')))
             this.props.onLoginCallback()
+
+            AsyncStorage.setItem('loginType','mainPgae')
+                .then(()=> console.log("update"))
+                .catch(e=>console.log("e: ",e))
+
+            AsyncStorage.setItem('token',responseData.data.token)
+                .then(()=> console.log("update"))
+                .catch(e=>console.log("e: ",e))
+
         }
         fetchData(url,param,callback);
-        // console.log(JSON.stringify(token))
+    }
+
+    componentDidMount(){
+
     }
   render() {
       return(

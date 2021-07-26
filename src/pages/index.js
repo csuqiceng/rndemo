@@ -19,20 +19,6 @@ export default class MainPage extends React.Component {
         }
     }
 
-    componentDidMount = () => {
-        // 这里监听一个事件，如果需要显示商品推荐页面，则将showMarket置为true
-        this.subscribe = DeviceEventEmitter.addListener('Home', () => {
-            console.log("ddd2")
-            this.setState({
-                showMarket: true
-            });
-        });
-    };
-
-    componentWillUnmount = () => {
-        this.subscribe && this.subscribe.remove();
-    };
-
     render() {
         if (this.state.showMarket) {
             return null
