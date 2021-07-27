@@ -1,6 +1,4 @@
-/**
- * Created by zhaopengsong on 2016/12/22.
- */
+
 import React, { Component } from 'react';
 import {
     AppRegistry,

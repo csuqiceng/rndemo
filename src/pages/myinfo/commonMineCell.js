@@ -1,6 +1,4 @@
-/**
- * Created by zhaopengsong on 2016/12/19.
- */
+
 import React, { Component } from 'react';
 import {
     AppRegistry,
@@ -16,28 +14,22 @@ function rightSubView(props) {
         <View style={{flexDirection:'row', alignItems:'center'}}>
             {renderRightContent(props)}
             {/*箭头*/}
-            <Image source={require('../../assets/images/myinfo/icon_back.png')} style={{width:8, height:13, marginRight:8, marginLeft:5}}/>
+            <Image source={require('../../assets/images/myinfo/icon_back.png')} style={{width:15, height:25, marginRight:8, marginLeft:5}}/>
         </View>
     )
 }
 function renderRightContent(props) {
-    if(props.rightIconName&&props.rightIconName.length == 0){ // 不返回图片
-        return(
-            <Text style={{color:'gray'}}>{props.rightTitle}</Text>
-        )
-    }else{
-        return(
-            <Image source={require('../../assets/favicon.png')}  style={{width:24, height:13}}/>
-        )
-    }
+    return(
+        <Text style={{color:'gray'}}>{props.rightTitle}</Text>
+    )
 }
 export  default function CommonMineCell(props) {
     return (
-        <TouchableOpacity activeOpacity={0.5}>
+        <TouchableOpacity activeOpacity={0.5} onPress={()=>{props.onCellClick()}}>
             <View style={styles.container}>
                 {/*--左边--*/}
                 <View style={styles.leftViewStyle}>
-                    <Image source={require('../../assets/favicon.png')} style={styles.leftImgStyle}/>
+                    <Image source={props.leftIconName} style={{...styles.leftImgStyle,width:props.leftIconName?24:0}}/>
                     <Text style={styles.leftTitleStyle}>{props.leftTitle}</Text>
                 </View>
                 {/*--右边--*/}
@@ -61,11 +53,11 @@ const styles = StyleSheet.create({
         // 垂直居中
         alignItems:'center',
         // 高度
-        height:Platform.OS == 'ios' ? 40 : 36,
+        height:Platform.OS == 'ios' ? 50 : 36,
 
         // 下边框
-        borderBottomColor:'#e8e8e8',
-        borderBottomWidth:0.5
+        // borderBottomColor:'#e8e8e8',
+        // borderBottomWidth:1
     },
 
     leftViewStyle:{
@@ -78,7 +70,7 @@ const styles = StyleSheet.create({
     },
 
     rightViewStyle:{
-
+        paddingRight:5
     },
 
     leftImgStyle:{ // 左边的图片
@@ -90,6 +82,6 @@ const styles = StyleSheet.create({
     },
 
     leftTitleStyle:{
-        fontSize:16
+        fontSize:16,
     }
 });

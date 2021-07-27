@@ -13,6 +13,8 @@ import MineMiddleView from './mineMiddleView'
 import LoginView from "../login/loginView";
 import RegisterView from "../login/registerView";
 import SystemPage from "./system";
+import MyOrderView from "./orderView";
+import MyBalanceView from "./balance";
 import Changepassword from "./changepassword";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -48,11 +50,12 @@ export default class MinePage extends React.Component {
                     <MyinfoStack.Screen name="mainPgae" options={{}} component={MyinfoPage} />
                     <MyinfoStack.Screen name="system" options={{}} component={SystemPage} />
                     <MyinfoStack.Screen name="changepassword" options={{}} component={Changepassword} />
+                    <MyinfoStack.Screen name="myorder" options={{}} component={MyOrderView} />
+                    <MyinfoStack.Screen name="balance" options={{}} component={MyBalanceView} />
                 </MyinfoStack.Navigator>
             );
         }
 }
-
 
  class MyinfoPage extends React.Component {
     constructor() {
@@ -61,55 +64,74 @@ export default class MinePage extends React.Component {
      onSystemPageCallback=()=>{
          this.props.navigation.navigate('system')
      }
+     onMyAllOrderCallback=()=>{
+         this.props.navigation.navigate('myorder',{"id":'allorder'})
+     }
+     onMyRemainingCallback=()=>{
+         this.props.navigation.navigate('balance')
+     }
+     onMyCollectCallback=()=>{
+         alert("我的收藏")
+     }
+     onMyCouponCallback=()=>{
+         alert("我的优惠券")
+     }
+     onMyIntegrationCallback=()=>{
+         alert("我的积分")
+     }
+     onMyMemberCallback=()=>{
+         alert("会员中心")
+     }
+     onMyAddressCallback=()=>{
+         alert("我的地址")
+     }
     render() {
+        const {navigation} = this.props;
         return (
             <View style={styles.container}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <MineHeaderView onSystemPageCallback={this.onSystemPageCallback}/>
-                    <View>
+                    <View style={{borderBottomColor:'#e8e8e8',borderBottomWidth:1,marginBottom:10}}>
                         <MyCell
-                            leftIconName="collect"
+                            // leftIconName="collect"
                             leftTitle="我的订单"
-                            rightTitle="查看全部订单"
+                            rightTitle="全部订单"
+                            onCellClick={this.onMyAllOrderCallback}
                         />
                     </View>
 
-                    <MineMiddleView />
-
-                    <View style={{marginTop:20}}>
-
-
+                    <MineMiddleView navigation={navigation}/>
+                    <View style={{marginTop:10}}>
                         <MyCell
-                            leftIconName="draft"
-                            leftTitle="钱包"
-                            rightTitle="账户余额:¥100"
+                            leftIconName={require('../../assets/images/myinfo/my_icon_remaining.png')}
+                            leftTitle="我的余额"
+                            onCellClick={this.onMyRemainingCallback}
                         />
 
                         <MyCell
-                            leftIconName="like"
-                            leftTitle="抵用券"
-                            rightTitle="10张"
+                            leftIconName={require('../../assets/images/myinfo/my_icon_collect.png')}
+                            leftTitle="我的收藏"
+                            onCellClick={this.onMyCollectCallback}
                         />
-                    </View>
-                    <View style={{marginTop:20}}>
                         <MyCell
-                            leftIconName="card"
-                            leftTitle="积分商城"
+                            leftIconName={require('../../assets/images/myinfo/my_icon_coupon.png')}
+                            leftTitle="我的优惠券"
+                            onCellClick={this.onMyCouponCallback}
                         />
-                    </View>
-
-                    <View style={{marginTop:20}}>
                         <MyCell
-                            leftIconName="new_friend"
-                            leftTitle="今日推荐"
-                            rightIconName="me_new"
+                            leftIconName={require('../../assets/images/myinfo/my_icon_integration.png')}
+                            leftTitle="我的积分"
+                            onCellClick={this.onMyIntegrationCallback}
                         />
-                    </View>
-                    <View style={{marginTop:20}}>
                         <MyCell
-                            leftIconName="pay"
-                            leftTitle="我要合作"
-                            rightTitle="轻松开店,招财进宝"
+                            leftIconName={require('../../assets/images/myinfo/my_icon_member.png')}
+                            leftTitle="会员中心"
+                            onCellClick={this.onMyMemberCallback}
+                        />
+                        <MyCell
+                            leftIconName={require('../../assets/images/myinfo/my_icon_address.png')}
+                            leftTitle="我的地址"
+                            onCellClick={this.onMyAddressCallback}
                         />
                     </View>
                 </ScrollView>
@@ -122,6 +144,6 @@ export default class MinePage extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#e8e8e8',
+        backgroundColor: 'white',
     },
 });
