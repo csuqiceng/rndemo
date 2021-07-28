@@ -20,8 +20,9 @@ export default class GuidePage extends React.Component{
             dataSource: '',
         }
     }
-    onMomentumScrollEnd=(e, state, context)=>{
-        if (state.index ==2){
+
+    onIndexChanged=(e)=>{
+        if (e ==2){
             this.props.navigation.navigate('Home')
         }
     }
@@ -33,7 +34,8 @@ export default class GuidePage extends React.Component{
                         <Swiper
                             style={styles.wrapper}
                             // autoplay
-                            onMomentumScrollEnd={(e, state, context) => {this.onMomentumScrollEnd(e, state, context)}}
+                            onIndexChanged={this.onIndexChanged}
+                            // onMomentumScrollEnd={(e, state, context) => {this.onMomentumScrollEnd(e, state, context)}}
                             dot={<View style={{backgroundColor:'rgba(0,0,0,.5)', width: 30, height: 4,borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3,}} />}
                             activeDot={<View style={{backgroundColor: '#1CCAA7', width: 30, height: 4,borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3}} />}
                             paginationStyle={{
