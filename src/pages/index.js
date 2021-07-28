@@ -26,6 +26,7 @@ export default class MainPage extends React.Component {
             return (
                 <Tab.Navigator screenOptions={{
                     headerShown: false,
+                    // tabBarVisible:true,
                 }}>
                     <Tab.Screen name="Home" component={ServicePage} options={{
                         tabBarLabel: '首页',
@@ -37,7 +38,6 @@ export default class MainPage extends React.Component {
                         )
                     }} />
                     <Tab.Screen name="Classify" component={Classify} options={{
-                        // tabBarVisible:false,
                         tabBarLabel: '分类',
                         tabBarIcon: ({ focused, tintColor }) => (
                             <Image

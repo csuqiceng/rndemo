@@ -9,8 +9,10 @@ import {
   TransitionPresets,
 } from '@react-navigation/stack';
 import MainPage from './src/pages';
+import GuidePage from './src/pages/guide/guidePage';
 const Stack = createStackNavigator();
-
+import { createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+const Tab = createBottomTabNavigator();
 window.isLogin = false;
 
 function App() {
@@ -29,13 +31,14 @@ function App() {
     };
 
     const SignScreens = {
-        SignIn: LoginView,
-        SignUp: RegisterView,
+        // SignIn: LoginView,
+        // SignUp: RegisterView,
+        Guide:GuidePage,
         Home: MainPage,
     };
 
 
-    if(1){
+    if(0){
         return (
             <NavigationContainer>
                 <MainPage></MainPage>
